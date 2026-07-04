@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:5000";
+const API = "https://opow-backend.onrender.com";
 
 async function post(url, body) {
   const res = await fetch(API + url, { method: "POST",
