@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>One People One World</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f2f5;
+      color: #1c1e21;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Layout ── */
+    #app { display: flex; flex: 1; overflow: hidden; }
+
+    #sidebar {
+      width: 220px;
+      background: #fff;
+      border-right: 1px solid #e4e6ea;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 12px;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1877f2;
+      padding: 4px 8px 16px;
+      border-bottom: 1px solid #e4e6ea;
+      margin-bottom: 8px;
+    }
+    .logo small { display: block; font-size: 10px; color: #65676b; font-weight: 400; }
+
+    .nav-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none; background: none;
+      font-size: 14px; color: #1c1e21;
+      cursor: pointer; text-align: left; width: 100%;
+      transition: background .15s;
+    }
+    .nav-btn:hover  { background: #f0f2f5; }
+    .nav-btn.active { background: #e7f0fd; color: #1877f2; font-weight: 600; }
+    .nav-icon { font-size: 18px; width: 22px; text-align: center; }
+
+    #user-info {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid #e4e6ea;
+      font-size: 13px;
+      color: #65676b;
+    }
+    #user-info strong { display: block; color: #1c1e21; font-size: 14px; }
+
+    #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* ── Pages ── */
+    .page { flex: 1; overflow-y: auto; padding: 20px; display: none; }
+    .page.active { display: block; }
+
+    /* ── Auth page ── */
+    #auth-page {
+      display: flex; align-items: center; justify-content: center;
+      flex: 1; background: #f0f2f5;
+    }
+    .auth-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      width: 380px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .auth-box h1 { font-size: 22px; color: #1877f2; margin-bottom: 4px; }
+    .auth-box p  { font-size: 13px; color: #65676b; margin-bottom: 20px; }
+    .auth-tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #e4e6ea; }
+    .auth-tab {
+      flex: 1; padding: 10px; background: none; border: none;
+      font-size: 14px; cursor: pointer; color: #65676b;
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+    }
+    .auth-tab.active { color: #1877f2; border-bottom-color: #1877f2; font-weight: 600; }
+    input[type=text], input[type=password], textarea, select {
+      width: 100%; padding: 10px 12px;
+      border: 1px solid #ccd0d5; border-radius: 8px;
+      font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color .2s;
+      margin-bottom: 10px; background: #fff; color: #1c1e21;
+    }
+    input:focus, textarea:focus { border-color: #1877f2; }
+    .btn {
+      padding: 10px 18px; border-radius: 8px; border: none;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background .15s, opacity .15s;
+    }
+    .btn-primary { background: #1877f2; color: #fff; width: 100%; }
+    .btn-primary:hover { background: #166fe5; }
+    .btn-sm { padding: 6px 14px; font-size: 13px; }
+    .btn-outline { background: none; border: 1px solid #ccd0d5; color: #1c1e21; }
+    .btn-outline:hover { background: #f0f2f5; }
+    .btn-danger { background: #fa3e3e; color: #fff; }
+    .btn-danger:hover { background: #e02020; }
+    .err { color: #fa3e3e; font-size: 13px; margin-top: 6px; min-height: 18px; }
+
+    /* ── Feed / Posts ── */
+    .card {
+      background: #fff; border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      margin-bottom: 14px; padding: 16px;
+      max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .compose-box textarea { resize: none; height: 80px; margin-bottom: 8px; }
+    .compose-footer { display: flex; justify-content: space-between; align-items: center; }
+    .char-count { font-size: 12px; color: #65676b; }
+
+    .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #1877f2; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
+    }
+    .post-meta .name { font-size: 14px; font-weight: 700; }
+    .post-meta .time { font-size: 12px; color: #65676b; }
+    .post-body { font-size: 15px; line-height: 1.5; margin-bottom: 10px; }
+    .post-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .post-actions .btn-sm { font-weight: 400; }
+    .liked { color: #e02020; border-color: #e02020; }
+
+    /* ── Messages ── */
+    .msg-layout { display: flex; gap: 16px; max-width: 700px; margin: auto; }
+    .contact-list { width: 200px; flex-shrink: 0; }
+    .contact-item {
+      padding: 10px 12px; border-radius: 8px; cursor: pointer;
+      font-size: 14px; transition: background .15s;
+    }
+    .contact-item:hover  { background: #f0f2f5; }
+    .contact-item.active { background: #e7f0fd; color: #1877f2; font-weight: 600; }
+    .chat-area { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .msg-bubble {
+      max-width: 75%; padding: 8px 12px;
+      border-radius: 18px; font-size: 14px; line-height: 1.4;
+    }
+    .msg-bubble.sent { background: #1877f2; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .msg-bubble.recv { background: #f0f2f5; align-self: flex-start; border-bottom-left-radius: 4px; }
+    #chat-messages { display: flex; flex-direction: column; gap: 6px; min-height: 200px; }
+    .msg-input-row { display: flex; gap: 8px; align-items: flex-end; }
+    .msg-input-row textarea { flex: 1; height: 40px; margin: 0; resize: none; }
+    .new-chat-row { display: flex; gap: 8px; margin-bottom: 12px; }
+    .new-chat-row input { flex: 1; margin: 0; }
+
+    /* ── Profile ── */
+    .profile-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 20px;
+    }
+    .profile-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: #1877f2; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; font-weight: 700;
+    }
+    .profile-stats { display: flex; gap: 20px; margin-top: 8px; font-size: 13px; color: #65676b; }
+    .profile-stats strong { color: #1c1e21; }
+
+    /* ── Communities ── */
+    .community-card {
+      background: #fff; border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      padding: 16px; margin-bottom: 12px;
+      max-width: 540px; margin-left: auto; margin-right: auto;
+    }
+    .community-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .community-desc { font-size: 13px; color: #65676b; margin-bottom: 10px; }
+    .community-meta { font-size: 12px; color: #65676b; }
+
+    /* ── Status bar ── */
+    #status-bar {
+      height: 24px; background: #fff; border-top: 1px solid #e4e6ea;
+      display: flex; align-items: center; padding: 0 16px;
+      font-size: 11px; color: #65676b; gap: 16px;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .dot.green { background: #31a24c; }
+    .dot.red   { background: #fa3e3e; }
+
+    /* ── Misc ── */
+    h2 { font-size: 18px; margin-bottom: 16px; }
+    .section-head { max-width: 640px; margin: 0 auto 12px; font-size: 13px; color: #65676b; font-weight: 600; }
+    .empty { text-align: center; color: #65676b; padding: 32px; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<!-- Auth screen (shown before login) -->
+<div id="auth-page">
+  <div class="auth-box">
+    <h1>🌍 One People One World</h1>
+    <p>Connecting humanity — one post at a time.</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Log in</button>
+      <button class="auth-tab"        onclick="switchTab('register')">Register</button>
+    </div>
+
+    <div id="tab-login">
+      <input type="text"     id="login-user" placeholder="Username">
+      <input type="password" id="login-pass" placeholder="Password">
+      <button class="btn btn-primary" onclick="doLogin()">Log in</button>
+      <div class="err" id="login-err"></div>
+    </div>
+
+    <div id="tab-register" style="display:none">
+      <input type="text"     id="reg-display" placeholder="Display name (e.g. Maya Rodriguez)">
+      <input type="text"     id="reg-user"    placeholder="Username (no spaces)">
+      <input type="password" id="reg-pass"    placeholder="Password (min 4 chars)">
+      <button class="btn btn-primary" onclick="doRegister()">Create account</button>
+      <div class="err" id="reg-err"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main app (hidden until login) -->
+<div id="app" style="display:none">
+  <div id="sidebar">
+    <div class="logo">🌍 OPOW <small>MVP v1</small></div>
+
+    <button class="nav-btn active" onclick="showPage('feed')"        id="nav-feed">
+      <span class="nav-icon">📰</span> Feed
+    </button>
+    <button class="nav-btn"        onclick="showPage('communities')" id="nav-communities">
+      <span class="nav-icon">👥</span> Communities
+    </button>
+    <button class="nav-btn"        onclick="showPage('messages')"    id="nav-messages">
+      <span class="nav-icon">💬</span> Messages
+    </button>
+    <button class="nav-btn"        onclick="showPage('profile')"     id="nav-profile">
+      <span class="nav-icon">👤</span> Profile
+    </button>
+
+    <div id="user-info">
+      <strong id="sidebar-name"></strong>
+      <span   id="sidebar-user"></span>
+    </div>
+  </div>
+
+  <div id="main">
+
+    <!-- FEED PAGE -->
+    <div class="page active" id="page-feed">
+      <div class="card compose-box">
+        <textarea id="post-input" placeholder="What's on your mind?" oninput="updateCharCount()"></textarea>
+        <div class="compose-footer">
+          <span class="char-count" id="char-count">0 / 500</span>
+          <button class="btn btn-primary btn-sm" onclick="submitPost()">Post</button>
+        </div>
+      </div>
+      <div class="section-head">Global feed</div>
+      <div id="feed-list"></div>
+    </div>
+
+    <!-- COMMUNITIES PAGE -->
+    <div class="page" id="page-communities">
+      <div class="card" style="max-width:540px;margin:0 auto 16px">
+        <h2 style="margin-bottom:12px">Create a community</h2>
+        <input  type="text" id="com-name" placeholder="Community name">
+        <input  type="text" id="com-desc" placeholder="Description (optional)">
+        <button class="btn btn-primary btn-sm" onclick="createCommunity()">Create</button>
+        <div class="err" id="com-err"></div>
+      </div>
+      <div id="community-list"></div>
+    </div>
+
+    <!-- MESSAGES PAGE -->
+    <div class="page" id="page-messages">
+      <div class="msg-layout">
+        <div class="contact-list">
+          <div class="new-chat-row">
+            <input type="text" id="new-chat-user" placeholder="Username" style="margin:0">
+            <button class="btn btn-sm btn-outline" onclick="startChat()">Chat</button>
+          </div>
+          <div id="contact-list-items"></div>
+        </div>
+        <div class="chat-area">
+          <div id="chat-with" style="font-size:14px;font-weight:700;color:#65676b;margin-bottom:6px">
+            Select a contact to start chatting
+          </div>
+          <div id="chat-messages"></div>
+          <div class="msg-input-row" id="msg-input-row" style="display:none">
+            <textarea id="msg-input" placeholder="Message…" onkeydown="msgEnter(event)"></textarea>
+            <button class="btn btn-primary btn-sm" onclick="sendMsg()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div class="page" id="page-profile">
+      <div class="card" style="max-width:600px;margin:0 auto">
+        <div class="profile-header">
+          <div class="profile-avatar" id="profile-avatar"></div>
+          <div>
+            <div style="font-size:20px;font-weight:700" id="profile-display"></div>
+            <div style="font-size:13px;color:#65676b"   id="profile-username"></div>
+            <div class="profile-stats">
+              <div><strong id="profile-posts">0</strong> posts</div>
+              <div><strong id="profile-followers">0</strong> followers</div>
+              <div><strong id="profile-following">0</strong> following</div>
+            </div>
+          </div>
+        </div>
+        <textarea id="bio-input" placeholder="Write something about yourself…" style="height:70px"></textarea>
+        <button class="btn btn-primary btn-sm" onclick="saveBio()">Save bio</button>
+        <div class="err" id="bio-msg" style="color:#31a24c;margin-top:6px"></div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid #e4e6ea">
+        <h2>Your posts</h2>
+        <div id="profile-posts-list"></div>
+      </div>
+    </div>
+
+  </div><!-- /#main -->
+
+  <div id="status-bar">
+    <span><span class="dot green" id="api-dot"></span><span id="api-status">Connecting…</span></span>
+    <span id="status-user"></span>
+  </div>
+</div><!-- /#app -->
+
+<script src="app.js"></script>
+</body>
+</html>
