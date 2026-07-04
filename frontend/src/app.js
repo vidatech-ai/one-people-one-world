@@ -1,3 +1,35 @@
+const API = "https://opow-backend.onrender.com";
+
+window.api = {
+  register: (username, password, display_name) =>
+    fetch(API + "/auth/register", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username, password, display_name}) }).then(r => r.json()),
+  login: (username, password) =>
+    fetch(API + "/auth/login", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username, password}) }).then(r => r.json()),
+  createPost: (username, content, community) =>
+    fetch(API + "/posts/", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username, content, community}) }).then(r => r.json()),
+  getPosts: (filters = {}) => { const p = new URLSearchParams(filters).toString(); return fetch(API + "/posts/" + (p ? "?" + p : "")).then(r => r.json()); },
+  likePost: (post_id, username) =>
+    fetch(API + `/posts/${post_id}/like`, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username}) }).then(r => r.json()),
+  deletePost: (post_id, username) =>
+    fetch(API + `/posts/${post_id}`, { method: "DELETE", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username}) }).then(r => r.json()),
+  getUser: (username) => fetch(API + `/users/${username}`).then(r => r.json()),
+  listUsers: () => fetch(API + "/users/").then(r => r.json()),
+  updateBio: (username, bio) =>
+    fetch(API + `/users/${username}/bio`, { method: "PUT", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username, bio}) }).then(r => r.json()),
+  followUser: (target, username) =>
+    fetch(API + `/users/${target}/follow`, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username}) }).then(r => r.json()),
+  sendMessage: (from, to, content) =>
+    fetch(API + "/messages/send", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({from, to, content}) }).then(r => r.json()),
+  getConversation: (a, b) => fetch(API + `/messages/conversation?a=${a}&b=${b}`).then(r => r.json()),
+  getInbox: (username) => fetch(API + `/messages/inbox/${username}`).then(r => r.json()),
+  listCommunities: () => fetch(API + "/communities/").then(r => r.json()),
+  createCommunity: (username, name, description) =>
+    fetch(API + "/communities/", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username, name, description}) }).then(r => r.json()),
+  joinCommunity: (community_id, username) =>
+    fetch(API + `/communities/${community_id}/join`, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username}) }).then(r => r.json()),
+};
+
+
 // ── State ──────────────────────────────────────────────
 let currentUser = null;   // { username, display_name, id, bio }
 let currentChat = null;   // username of active chat partner
@@ -301,7 +333,7 @@ async function saveBio() {
 // ── API status ───────────────────────────────────────────
 async function checkApi() {
   try {
-    const res = await fetch("http://127.0.0.1:5000/users/");
+    const res = await fetch("https://opow-backend.onrender.com/users/");
     if (res.ok) {
       el("api-dot").className   = "dot green";
       el("api-status").textContent = "Backend connected";
