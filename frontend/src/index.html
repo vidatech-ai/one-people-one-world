@@ -1,1269 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Vidatech AI by Murati</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>One People One World — Bridge the Gap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue-primary: #00aaff;
-      --blue-glow: #00ccff;
-      --blue-dark: #0066cc;
-      --bg-dark: #050a14;
-      --bg-panel: #0a1628;
-      --bg-card: #0d1f3c;
-      --text-primary: #e0f0ff;
-      --text-secondary: #7ab3d4;
-      --border-color: #1a3a5c;
-      --accent-green: #00ff88;
-      --accent-orange: #ff6600;
-      --accent-purple: #8844ff;
+      --earth:  #0d1f0d;
+      --forest: #163016;
+      --leaf:   #2e7d32;
+      --sage:   #66bb6a;
+      --gold:   #f9a825;
+      --warm:   #fff8e1;
+      --cream:  #fafdf8;
+      --mist:   #e8f5e9;
+      --text:   #0d1f0d;
+      --muted:  #4a6741;
+      --border: #c8e6c9;
+      --white:  #ffffff;
+      --red:    #b71c1c;
+      --rich:   #1565c0;
+      --poor:   #e65100;
+      --r: 12px;
+      --display: 'Playfair Display', Georgia, serif;
+      --body: 'Inter', system-ui, sans-serif;
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body); background: var(--cream); color: var(--text); }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── NO DOWNLOAD / SCREENSHOT PROTECTION ── */
+    .post-img {
+      -webkit-user-select: none;
+      user-select: none;
+      pointer-events: none;
+      -webkit-touch-callout: none;
+    }
+    img { -webkit-user-drag: none; user-drag: none; }
 
-    body {
-      font-family: 'Share Tech Mono', monospace;
-      background: var(--bg-dark);
-      color: var(--text-primary);
+    /* ══ LANDING ══ */
+    #landing { display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* HERO */
+    .hero {
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Animated grid background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,170,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,170,255,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* === HEADER === */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 60px;
-      background: rgba(5,10,20,0.95);
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-    }
-
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--blue-primary);
-      text-shadow: 0 0 20px rgba(0,170,255,0.6);
-      letter-spacing: 3px;
-    }
-
-    .logo span { color: var(--accent-green); }
-
-    .header-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--accent-green);
-    }
-
-    .status-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    /* === SIDEBAR === */
-    .sidebar {
-      position: fixed;
-      top: 60px; left: 0; bottom: 0;
-      width: 260px;
-      background: var(--bg-panel);
-      border-right: 1px solid var(--border-color);
-      padding: 20px 16px;
-      z-index: 90;
-      overflow-y: auto;
-    }
-
-    .sidebar-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px;
-      color: var(--text-secondary);
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .new-chat-btn {
-      width: 100%;
-      padding: 10px;
-      background: linear-gradient(135deg, var(--blue-dark), var(--blue-primary));
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      margin-bottom: 20px;
-      transition: all 0.2s;
-      box-shadow: 0 0 15px rgba(0,170,255,0.3);
-    }
-
-    .new-chat-btn:hover {
-      box-shadow: 0 0 25px rgba(0,170,255,0.6);
-      transform: translateY(-1px);
-    }
-
-    .chat-history-item {
-      padding: 10px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      color: var(--text-secondary);
-      margin-bottom: 4px;
-      border: 1px solid transparent;
-      transition: all 0.2s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .chat-history-item:hover, .chat-history-item.active {
-      background: var(--bg-card);
-      border-color: var(--border-color);
-      color: var(--text-primary);
-    }
-
-    .sidebar-section {
-      margin-top: 20px;
-    }
-
-    .model-selector {
-      width: 100%;
-      padding: 8px 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      color: var(--text-primary);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 12px;
-      cursor: pointer;
-      outline: none;
-    }
-
-    .model-selector option { background: var(--bg-card); }
-
-    /* === MAIN CHAT AREA === */
-    .main {
-      margin-left: 260px;
-      margin-top: 60px;
-      min-height: calc(100vh - 60px);
+      background: var(--earth);
+      color: #fff;
       display: flex;
       flex-direction: column;
-    }
-
-    .chat-container {
-      flex: 1;
-      padding: 24px;
-      padding-bottom: 180px;
-      overflow-y: auto;
-      max-width: 860px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    /* === WELCOME SCREEN === */
-    .welcome {
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .welcome-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--blue-primary), var(--accent-green));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-
-    .welcome-sub {
-      color: var(--text-secondary);
-      font-size: 14px;
-      margin-bottom: 40px;
-    }
-
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .quick-action {
-      padding: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
-    }
-
-    .quick-action:hover {
-      border-color: var(--blue-primary);
-      box-shadow: 0 0 15px rgba(0,170,255,0.2);
-      transform: translateY(-2px);
-    }
-
-    .quick-action-icon { font-size: 20px; margin-bottom: 8px; }
-    .quick-action-label { font-size: 12px; color: var(--text-secondary); }
-
-    /* === MESSAGES === */
-    .message {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 24px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .message.user { flex-direction: row-reverse; }
-
-    .avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px;
-      flex-shrink: 0;
-      border: 1px solid var(--border-color);
-    }
-
-    .avatar.ai {
-      background: linear-gradient(135deg, var(--blue-dark), var(--accent-purple));
-      box-shadow: 0 0 12px rgba(0,170,255,0.4);
-    }
-
-    .avatar.user-av {
-      background: linear-gradient(135deg, #1a3a5c, #0d1f3c);
-    }
-
-    .bubble {
-      max-width: 70%;
-      padding: 14px 18px;
-      border-radius: 12px;
-      font-size: 14px;
-      line-height: 1.7;
-      position: relative;
-    }
-
-    .bubble.ai {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-top-left-radius: 2px;
-    }
-
-    .bubble.user {
-      background: linear-gradient(135deg, #0044aa, #0066cc);
-      border: 1px solid rgba(0,170,255,0.3);
-      border-top-right-radius: 2px;
-      text-align: right;
-    }
-
-    /* === IMAGE PREVIEW IN BUBBLE === */
-    .bubble-image {
-      max-width: 100%;
-      max-height: 300px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      display: block;
-      object-fit: contain;
-      border: 1px solid var(--border-color);
-    }
-
-    .bubble-file-preview {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      background: rgba(0,0,0,0.3);
-      border-radius: 8px;
-      margin-bottom: 8px;
-      border: 1px solid var(--border-color);
-    }
-
-    .bubble-file-icon { font-size: 24px; }
-
-    .bubble-file-info { flex: 1; }
-    .bubble-file-name { font-size: 13px; color: var(--text-primary); }
-    .bubble-file-size { font-size: 11px; color: var(--text-secondary); }
-
-    /* === IMAGE EDIT TOOLBAR === */
-    .image-edit-toolbar {
-      display: none;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-      padding: 10px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-    }
-
-    .image-edit-toolbar.visible { display: flex; }
-
-    .edit-btn {
-      padding: 5px 10px;
-      background: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-secondary);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .edit-btn:hover {
-      border-color: var(--blue-primary);
-      color: var(--blue-primary);
-    }
-
-    .edit-btn.active {
-      background: var(--blue-dark);
-      border-color: var(--blue-primary);
-      color: var(--blue-glow);
-    }
-
-    .brightness-slider {
-      width: 100px;
-      accent-color: var(--blue-primary);
-      vertical-align: middle;
-    }
-
-    /* Download button in AI bubble */
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      padding: 6px 14px;
-      background: linear-gradient(135deg, #003366, #005599);
-      border: 1px solid var(--blue-primary);
-      border-radius: 6px;
-      color: var(--blue-glow);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 12px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .download-btn:hover {
-      box-shadow: 0 0 12px rgba(0,170,255,0.5);
-      transform: translateY(-1px);
-    }
-
-    /* === DOCUMENT READER IN BUBBLE === */
-    .doc-reader {
-      margin-top: 10px;
-      max-height: 220px;
-      overflow-y: auto;
-      padding: 12px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      font-size: 12px;
-      color: var(--text-secondary);
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .doc-reader::-webkit-scrollbar { width: 4px; }
-    .doc-reader::-webkit-scrollbar-track { background: transparent; }
-    .doc-reader::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-
-    /* === TYPING INDICATOR === */
-    .typing {
-      display: flex;
-      gap: 5px;
-      padding: 14px 18px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      border-top-left-radius: 2px;
-      width: fit-content;
-    }
-
-    .typing span {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--blue-primary);
-      animation: bounce 1.2s infinite;
-    }
-
-    .typing span:nth-child(2) { animation-delay: 0.2s; }
-    .typing span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes bounce {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-      30% { transform: translateY(-6px); opacity: 1; }
-    }
-
-    /* === INPUT AREA === */
-    .input-area {
-      position: fixed;
-      bottom: 0;
-      left: 260px;
-      right: 0;
-      padding: 16px 24px 20px;
-      background: linear-gradient(to top, rgba(5,10,20,1) 70%, transparent);
-      z-index: 80;
-    }
-
-    .input-wrapper {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    /* === DRAG AND DROP ZONE === */
-    .drop-zone {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,170,255,0.08);
-      border: 3px dashed var(--blue-primary);
-      z-index: 200;
-      align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 12px;
-      pointer-events: none;
-    }
-
-    .drop-zone.active { display: flex; }
-
-    .drop-zone-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
-      color: var(--blue-primary);
-      text-shadow: 0 0 30px rgba(0,170,255,0.8);
-    }
-
-    /* === FILE PREVIEW BAR (above input) === */
-    .file-preview-bar {
-      display: none;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .file-preview-bar.has-files { display: flex; }
-
-    .file-chip {
-      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 12px;
-      max-width: 200px;
+      text-align: center;
+      padding: 60px 24px;
       position: relative;
-    }
-
-    .file-chip-thumb {
-      width: 32px; height: 32px;
-      border-radius: 4px;
-      object-fit: cover;
-    }
-
-    .file-chip-name {
-      flex: 1;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      color: var(--text-secondary);
-      font-size: 11px;
     }
 
-    .file-chip-remove {
-      cursor: pointer;
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1;
-      flex-shrink: 0;
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 70%, rgba(46,125,50,.4) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 20%, rgba(249,168,37,.2) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(22,48,22,.6) 0%, transparent 70%);
     }
 
-    .file-chip-remove:hover { color: var(--accent-orange); }
-
-    /* === TEXTAREA ROW === */
-    .textarea-row {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 10px 14px;
-      transition: border-color 0.2s;
+    /* Real photo collage behind hero */
+    .hero-photos {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 0;
+      opacity: 0.18;
+      filter: grayscale(40%);
     }
 
-    .textarea-row:focus-within {
-      border-color: var(--blue-primary);
-      box-shadow: 0 0 20px rgba(0,170,255,0.15);
+    .hero-photo {
+      background-size: cover;
+      background-position: center;
     }
 
-    .attach-btn {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 20px;
-      cursor: pointer;
-      padding: 4px;
-      flex-shrink: 0;
-      transition: color 0.2s;
+    .hero-content { position: relative; z-index: 2; max-width: 750px; }
+
+    .brand-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 30px; padding: 6px 16px; font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 24px;
     }
 
-    .attach-btn:hover { color: var(--blue-primary); }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(38px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); display: block; }
 
-    #file-input { display: none; }
-
-    textarea {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      color: var(--text-primary);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 14px;
-      resize: none;
-      min-height: 24px;
-      max-height: 160px;
-      line-height: 1.5;
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: rgba(255,255,255,.72);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto 40px;
     }
 
-    textarea::placeholder { color: var(--text-secondary); opacity: 0.6; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
 
-    .send-btn {
-      background: linear-gradient(135deg, var(--blue-dark), var(--blue-primary));
-      border: none;
-      border-radius: 8px;
-      color: white;
-      width: 38px; height: 38px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: all 0.2s;
-      font-size: 16px;
+    .btn-gold {
+      padding: 15px 36px; background: var(--gold); color: var(--earth);
+      border: none; border-radius: 50px; font-family: var(--body); font-size: 16px;
+      font-weight: 800; cursor: pointer; transition: all .2s;
+      box-shadow: 0 6px 24px rgba(249,168,37,.45); letter-spacing: .3px;
+    }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(249,168,37,.6); }
+
+    .btn-ghost-white {
+      padding: 15px 32px; background: rgba(255,255,255,.1); color: #fff;
+      border: 1.5px solid rgba(255,255,255,.3); border-radius: 50px;
+      font-family: var(--body); font-size: 16px; font-weight: 700; cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-ghost-white:hover { background: rgba(255,255,255,.18); }
+
+    /* Impact numbers */
+    .impact { display: flex; gap: clamp(32px, 8vw, 80px); justify-content: center; flex-wrap: wrap; }
+    .impact-item { text-align: center; }
+    .impact-num { font-family: var(--display); font-size: clamp(32px, 5vw, 52px); font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+    .impact-label { font-size: 11px; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+
+    /* Scroll indicator */
+    .scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2; color: rgba(255,255,255,.35); font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .scroll-arrow { font-size: 20px; animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+    /* REALITY SECTION */
+    .reality { background: var(--earth); padding: 80px 24px; }
+    .reality-inner { max-width: 1000px; margin: 0 auto; }
+    .reality-top { text-align: center; margin-bottom: 48px; }
+    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 12px; }
+    .big-title { font-family: var(--display); font-size: clamp(28px, 4vw, 44px); font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+    .big-sub { font-size: 15px; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 500px; margin: 0 auto; }
+
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .photo-card {
+      border-radius: 14px; overflow: hidden; position: relative;
+      aspect-ratio: 3/4;
+      background: #1a2e1a;
+      cursor: default;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
-    .send-btn:hover {
-      box-shadow: 0 0 15px rgba(0,170,255,0.5);
-      transform: translateY(-1px);
-    }
-
-    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-    /* === SCAN LINE EFFECT === */
-    .scanline {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue-primary), transparent);
-      animation: scan 4s linear infinite;
-      opacity: 0.15;
+    .photo-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(.8) saturate(.9);
+      transition: transform .4s;
+      -webkit-user-drag: none;
       pointer-events: none;
-      z-index: 999;
     }
 
-    @keyframes scan {
-      0%  { top: 60px; }
-      100%{ top: 100vh; }
+    .photo-card:hover img { transform: scale(1.04); }
+
+    .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,31,13,.9) 0%, rgba(13,31,13,.1) 50%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 16px;
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+    .photo-story { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.4; margin-bottom: 4px; }
+    .photo-loc   { font-size: 11px; color: rgba(255,255,255,.5); }
 
-    /* Code block */
-    pre {
-      background: rgba(0,0,0,0.4);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 12px;
-      overflow-x: auto;
-      margin: 8px 0;
-      font-size: 12px;
-      line-height: 1.5;
+    /* Prevent context menu on images */
+    .photo-card { -webkit-touch-callout: none; }
+
+    /* HOW IT WORKS */
+    .how { background: var(--warm); padding: 80px 24px; }
+    .how-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .how-grid  { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 48px; }
+
+    .how-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px 20px;
+      text-align: left; transition: transform .2s, box-shadow .2s;
+    }
+    .how-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(13,31,13,.1); }
+    .how-icon { font-size: 38px; margin-bottom: 14px; display: block; }
+    .how-card h3 { font-size: 15px; font-weight: 700; color: var(--earth); margin-bottom: 8px; }
+    .how-card p  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* TYPES — Rich vs Poor */
+    .types { background: var(--earth); padding: 80px 24px; }
+    .types-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+    .types-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+
+    .type-card {
+      border-radius: 20px; padding: 32px 24px; text-align: center;
+      transition: transform .2s;
+    }
+    .type-card:hover { transform: translateY(-4px); }
+
+    .type-rich {
+      background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+      border: 1px solid #1976d2;
+    }
+    .type-poor {
+      background: linear-gradient(135deg, #bf360c 0%, #8d1f00 100%);
+      border: 1px solid #e64a19;
     }
 
-    code { color: var(--accent-green); }
+    .type-icon { font-size: 52px; display: block; margin-bottom: 16px; }
+    .type-card h3 { font-family: var(--display); font-size: 22px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+    .type-card p  { font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.6; margin-bottom: 20px; }
+    .type-tag { display: inline-block; background: rgba(255,255,255,.15); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .5px; }
 
-    /* Image canvas (hidden, used for edits) */
-    #edit-canvas { display: none; }
+    /* AUTH SECTION */
+    .auth-section { background: var(--mist); padding: 80px 24px; }
+    .auth-inner { max-width: 460px; margin: 0 auto; }
+    .auth-title { font-family: var(--display); font-size: 30px; font-weight: 900; color: var(--earth); text-align: center; margin-bottom: 6px; }
+    .auth-sub   { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 28px; }
 
-    /* Brightness label */
-    .brightness-label {
-      font-size: 11px;
-      color: var(--text-secondary);
-      vertical-align: middle;
+    .auth-box {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      box-shadow: 0 8px 40px rgba(13,31,13,.1);
+    }
+
+    .auth-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+    .auth-tab {
+      flex: 1; padding: 10px; background: none; border: none;
+      font-family: var(--body); font-size: 14px; font-weight: 700;
+      cursor: pointer; color: var(--muted);
+      border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .15s;
+    }
+    .auth-tab.active { color: var(--earth); border-bottom-color: var(--leaf); }
+
+    .field-lbl { display: block; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 6px; }
+    input[type=text], input[type=password], textarea, select {
+      width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px;
+      font-family: var(--body); font-size: 14px; color: var(--text); background: #fff;
+      outline: none; margin-bottom: 14px; transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--leaf); }
+
+    .role-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+
+    .role-btn {
+      padding: 14px 8px; border-radius: 12px; border: 2px solid var(--border);
+      background: none; font-family: var(--body); cursor: pointer;
+      text-align: center; transition: all .15s;
+    }
+    .role-btn .role-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+    .role-btn .role-name { font-size: 13px; font-weight: 700; display: block; margin-bottom: 4px; }
+    .role-btn .role-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    .role-btn.pick-rich { border-color: #1565c0; background: rgba(21,101,192,.06); }
+    .role-btn.pick-rich .role-name { color: #1565c0; }
+    .role-btn.pick-poor { border-color: #e65100; background: rgba(230,81,0,.06); }
+    .role-btn.pick-poor .role-name { color: #e65100; }
+
+    .btn-submit {
+      width: 100%; padding: 14px; background: var(--earth); color: #fff;
+      border: none; border-radius: 12px; font-family: var(--body);
+      font-size: 15px; font-weight: 800; cursor: pointer; transition: background .15s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover { background: var(--forest); }
+
+    .err { color: var(--red); font-size: 13px; margin-top: -8px; margin-bottom: 10px; min-height: 18px; }
+
+    /* FOOTER */
+    footer { background: var(--earth); color: rgba(255,255,255,.35); text-align: center; padding: 28px 24px; font-size: 12px; line-height: 1.8; }
+    footer strong { color: rgba(255,255,255,.6); }
+
+    /* ══ APP ══ */
+    #app { display: none; flex-direction: column; height: 100vh; overflow: hidden; }
+
+    /* Top nav */
+    .topnav { background: var(--earth); color: #fff; display: flex; align-items: center; padding: 0 20px; height: 54px; flex-shrink: 0; gap: 12px; }
+    .topnav-brand { font-family: var(--display); font-size: 17px; font-weight: 900; color: #fff; flex-shrink: 0; }
+    .topnav-brand span { color: var(--gold); }
+    .topnav-tabs { display: flex; gap: 2px; flex: 1; justify-content: center; overflow-x: auto; }
+    .tab-btn {
+      padding: 7px 14px; border-radius: 20px; border: none; background: none;
+      color: rgba(255,255,255,.5); font-family: var(--body); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .15s; white-space: nowrap;
+    }
+    .tab-btn:hover  { background: rgba(255,255,255,.08); color: #fff; }
+    .tab-btn.active { background: rgba(255,255,255,.14); color: #fff; font-weight: 700; }
+    .user-chip { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+    .av-rich { background: #1565c0; color: #fff; }
+    .av-poor { background: #e65100; color: #fff; }
+    .role-badge { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; letter-spacing: .4px; text-transform: uppercase; }
+    .rb-rich { background: rgba(21,101,192,.2); color: #90caf9; }
+    .rb-poor { background: rgba(230,81,0,.2); color: #ffcc80; }
+
+    /* Main */
+    .main-scroll { flex: 1; overflow-y: auto; padding: 24px 16px 32px; }
+    .page { display: none; max-width: 680px; margin: 0 auto; }
+    .page.active { display: block; }
+
+    /* Compose */
+    .compose-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 22px; margin-bottom: 22px; }
+    .compose-top  { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .compose-lbl  { font-size: 13px; font-weight: 700; color: var(--muted); }
+
+    .post-type-row { display: flex; gap: 8px; margin-bottom: 14px; }
+    .pt-btn {
+      flex: 1; padding: 10px 8px; border-radius: 10px; border: 2px solid var(--border);
+      background: none; font-family: var(--body); font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: all .15s; color: var(--muted); line-height: 1.3;
+    }
+    .pt-offer { border-color: var(--leaf); background: rgba(46,125,50,.07); color: var(--leaf); }
+    .pt-need  { border-color: var(--poor); background: rgba(230,81,0,.06); color: var(--poor); }
+
+    .compose-card textarea { height: 90px; resize: none; }
+    .compose-foot { display: flex; justify-content: space-between; align-items: center; }
+    .cc { font-size: 12px; color: var(--muted); }
+
+    /* Buttons */
+    .btn { padding: 8px 16px; border-radius: 8px; border: none; font-family: var(--body); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .15s; }
+    .btn:active { transform: scale(.97); }
+    .btn-green   { background: var(--leaf); color: #fff; }
+    .btn-green:hover { background: var(--forest); }
+    .btn-blue    { background: #1565c0; color: #fff; }
+    .btn-blue:hover  { background: #0d47a1; }
+    .btn-orange  { background: var(--poor); color: #fff; }
+    .btn-orange:hover{ background: #bf360c; }
+    .btn-outline { background: none; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: var(--mist); }
+    .btn-danger  { background: var(--red); color: #fff; }
+    .btn-sm { padding: 6px 13px; font-size: 12px; }
+
+    /* Post cards — NO DOWNLOAD PROTECTION */
+    .post-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 18px;
+      padding: 20px; margin-bottom: 16px;
+      -webkit-user-select: none; user-select: none;
+    }
+
+    .ptype-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 800; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 12px; letter-spacing: .5px; text-transform: uppercase;
+    }
+    .pb-offer { background: rgba(46,125,50,.1); color: var(--leaf); }
+    .pb-need  { background: rgba(230,81,0,.1);  color: var(--poor); }
+
+    .post-hdr { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .post-name { font-size: 14px; font-weight: 700; color: var(--earth); }
+    .post-time { font-size: 11px; color: var(--muted); }
+    .post-body { font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 14px; white-space: pre-wrap; }
+
+    /* Post images — protected */
+    .post-img-wrap {
+      border-radius: 12px; overflow: hidden; margin-bottom: 14px;
+      position: relative;
+      -webkit-user-select: none; user-select: none;
+    }
+    .post-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: transparent;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .post-img-wrap img {
+      width: 100%; display: block; border-radius: 12px;
+      -webkit-user-drag: none; user-drag: none; pointer-events: none;
+      filter: brightness(.95);
+    }
+    .post-img-wrap .protect-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: transparent;
+    }
+
+    .post-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .liked { border-color: var(--red) !important; color: var(--red) !important; }
+
+    /* Communities */
+    .pg-title { font-family: var(--display); font-size: 24px; font-weight: 800; margin-bottom: 4px; color: var(--earth); }
+    .pg-sub   { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .create-box { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+    .ct { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--earth); }
+    .com-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .com-name { font-size: 15px; font-weight: 700; color: var(--earth); margin-bottom: 4px; }
+    .com-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 6px; }
+    .com-meta { font-size: 11px; color: var(--muted); }
+
+    /* Messages */
+    .msg-wrap { display: grid; grid-template-columns: 190px 1fr; gap: 14px; height: calc(100vh - 130px); }
+    .contacts-panel { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 12px; overflow-y: auto; }
+    .contacts-lbl { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); padding: 4px 8px 10px; }
+    .new-chat-row { display: flex; gap: 6px; margin-bottom: 8px; }
+    .new-chat-row input { flex: 1; margin: 0; font-size: 12px; padding: 7px 10px; }
+    .contact-item { padding: 9px 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: background .15s; }
+    .contact-item:hover { background: var(--mist); }
+    .contact-item.active { background: rgba(46,125,50,.1); color: var(--leaf); font-weight: 700; }
+    .chat-panel { background: #fff; border: 1px solid var(--border); border-radius: 14px; display: flex; flex-direction: column; overflow: hidden; }
+    .chat-hdr { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--muted); }
+    #chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .bubble { max-width: 72%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; -webkit-user-select: text; }
+    .bubble.sent { background: var(--earth); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .bubble.recv { background: var(--mist); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg-input-row { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); align-items: flex-end; }
+    .msg-input-row textarea { flex: 1; height: 40px; resize: none; margin: 0; font-size: 14px; padding: 9px 12px; }
+
+    /* Profile */
+    .prof-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px; margin-bottom: 22px; }
+    .prof-top  { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .prof-av   { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; flex-shrink: 0; }
+    .prof-name { font-family: var(--display); font-size: 22px; font-weight: 800; }
+    .prof-handle { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .prof-stats  { display: flex; gap: 18px; font-size: 13px; color: var(--muted); }
+    .prof-stats strong { color: var(--earth); }
+    hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+    /* Status bar */
+    .status-bar { height: 24px; background: var(--earth); display: flex; align-items: center; padding: 0 16px; font-size: 11px; color: rgba(255,255,255,.35); gap: 16px; flex-shrink: 0; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .dot-green { background: #4caf50; }
+    .dot-red   { background: var(--red); }
+
+    /* Empty */
+    .empty { text-align: center; color: var(--muted); padding: 40px 24px; font-size: 14px; line-height: 1.7; }
+    .ei { font-size: 42px; display: block; margin-bottom: 10px; }
+
+    /* Image upload */
+    .img-upload-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .img-upload-btn { padding: 7px 14px; border-radius: 8px; border: 1.5px dashed var(--border); background: none; font-family: var(--body); font-size: 12px; color: var(--muted); cursor: pointer; transition: all .15s; }
+    .img-upload-btn:hover { border-color: var(--leaf); color: var(--leaf); }
+    .img-preview { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; display: none; }
+
+    @media (max-width: 600px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .types-grid { grid-template-columns: 1fr; }
+      .msg-wrap   { grid-template-columns: 1fr; }
+      .hero-photos { display: none; }
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false">
 
-<div class="scanline"></div>
+<!-- ══════════ LANDING ══════════ -->
+<div id="landing">
 
-<!-- DRAG-DROP OVERLAY -->
-<div class="drop-zone" id="drop-zone">
-  <div style="font-size:60px">📎</div>
-  <div class="drop-zone-text">DROP FILES HERE</div>
-  <div style="color:var(--text-secondary);font-size:14px">Images, PDFs, Documents</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Photo mosaic background -->
+    <div class="hero-photos">
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1618498082410-b4aa22193b38?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1547550037-7b0e7e6be0e6?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1546961342-ea5f60b193b4?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1560785218-5a4f3d3c7a99?w=400&q=60')"></div>
+      <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=400&q=60')"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="brand-badge">🌍 One People One World</div>
+      <h1>
+        When the World<br>Has Enough —
+        <em>Why is Anyone Suffering?</em>
+      </h1>
+      <p>A direct bridge between those who have and those who need. No middlemen. No bureaucracy. Just one human reaching out to another.</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="scrollToAuth('register')">I want to help someone →</button>
+        <button class="btn-ghost-white" onclick="scrollToAuth('login')">I need help</button>
+      </div>
+      <div class="impact">
+        <div class="impact-item">
+          <span class="impact-num">$0</span>
+          <div class="impact-label">Platform fee, ever</div>
+        </div>
+        <div class="impact-item">
+          <span class="impact-num">🤝</span>
+          <div class="impact-label">Direct help</div>
+        </div>
+        <div class="impact-item">
+          <span class="impact-num">🔒</span>
+          <div class="impact-label">Dignity protected</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>scroll to learn more</span>
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- REALITY -->
+  <section class="reality">
+    <div class="reality-inner">
+      <div class="reality-top">
+        <div class="eyebrow">The reality</div>
+        <h2 class="big-title">Every face here is a story.<br>Every story deserves an ending.</h2>
+        <p class="big-sub">These are real people. Their situations are real. Your help could be the chapter that changes everything.</p>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=70" alt="Child in need" draggable="false"/>
+          <div class="photo-overlay">
+            <div class="photo-story">"My children haven't eaten today. I am trying everything."</div>
+            <div class="photo-loc">📍 Sub-Saharan Africa</div>
+          </div>
+          <div style="position:absolute;inset:0;z-index:5;cursor:default" oncontextmenu="return false"></div>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=70" alt="Community" draggable="false"/>
+          <div class="photo-overlay">
+            <div class="photo-story">"Our village has no clean water. Children walk 5km every day."</div>
+            <div class="photo-loc">📍 East Africa</div>
+          </div>
+          <div style="position:absolute;inset:0;z-index:5;cursor:default" oncontextmenu="return false"></div>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&q=70" alt="Aid" draggable="false"/>
+          <div class="photo-overlay">
+            <div class="photo-story">"I had a chance to sponsor a girl's education. She became a teacher."</div>
+            <div class="photo-loc">📍 West Africa</div>
+          </div>
+          <div style="position:absolute;inset:0;z-index:5;cursor:default" oncontextmenu="return false"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how">
+    <div class="how-inner">
+      <div class="eyebrow" style="color:var(--leaf)">How it works</div>
+      <h2 class="big-title" style="color:var(--earth)">Beautifully simple.<br>Powerfully human.</h2>
+      <p class="big-sub" style="color:var(--muted)">Three steps stand between someone's crisis and your helping hand.</p>
+      <div class="how-grid">
+        <div class="how-card">
+          <span class="how-icon">👤</span>
+          <h3>Join as who you are</h3>
+          <p>Sign up as someone who can give, or someone who needs. Both roles are equally important and equally respected here.</p>
+        </div>
+        <div class="how-card">
+          <span class="how-icon">📖</span>
+          <h3>Share your story</h3>
+          <p>Post your situation — what you need, what you can offer. Photos can be shared securely. Nothing can be downloaded or mocked.</p>
+        </div>
+        <div class="how-card">
+          <span class="how-icon">💬</span>
+          <h3>Connect directly</h3>
+          <p>No charity processing. No middlemen taking fees. One person sees another's post and reaches out directly. That's it.</p>
+        </div>
+        <div class="how-card">
+          <span class="how-icon">🛡️</span>
+          <h3>Dignity first, always</h3>
+          <p>Posts cannot be downloaded, screenshotted-shared, or used to mock. Your story is shared in safety, not vulnerability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES -->
+  <section class="types">
+    <div class="types-inner">
+      <div class="eyebrow" style="color:var(--sage)">Two sides, one world</div>
+      <h2 class="big-title">Everyone has a role to play.</h2>
+      <p class="big-sub" style="color:rgba(255,255,255,.55)">Whether you're joining to give or to receive — you belong here. And one day, the roles may switch.</p>
+      <div class="types-grid">
+        <div class="type-card type-rich">
+          <span class="type-icon">💼</span>
+          <h3>I can give</h3>
+          <p>You have skills, resources, money, time, or knowledge. You want to make a real difference — directly, not through a charity that takes 40% fees.</p>
+          <span class="type-tag">Doctor · Lawyer · Donor · Mentor</span>
+        </div>
+        <div class="type-card type-poor">
+          <span class="type-icon">🙏</span>
+          <h3>I need help</h3>
+          <p>You're facing a situation you can't solve alone. Medical costs, school fees, food, legal advice, or just someone who listens. Your dignity is protected here.</p>
+          <span class="type-tag">Medical · Education · Food · Legal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTH -->
+  <section class="auth-section" id="auth-anchor">
+    <div class="auth-inner">
+      <h2 class="auth-title">Take your place in the world.</h2>
+      <p class="auth-sub">Sign in to your account or join for free. No credit card. No fees. Ever.</p>
+
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login-btn"    onclick="switchTab('login')">Sign in</button>
+          <button class="auth-tab"        id="tab-register-btn" onclick="switchTab('register')">Create account</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="tab-login">
+          <label class="field-lbl">Username</label>
+          <input type="text"     id="login-user" placeholder="your username" autocomplete="username">
+          <label class="field-lbl">Password</label>
+          <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+          <button class="btn-submit" onclick="doLogin()">Sign in to my account</button>
+          <div class="err" id="login-err"></div>
+          <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted)">No account yet? <a href="#" onclick="switchTab('register');return false" style="color:var(--leaf);font-weight:700">Join the world →</a></p>
+        </div>
+
+        <!-- REGISTER -->
+        <div id="tab-register" style="display:none">
+          <label class="field-lbl">Your full name</label>
+          <input type="text" id="reg-display" placeholder="How the world will know you">
+          <label class="field-lbl">Username</label>
+          <input type="text" id="reg-user" placeholder="unique, no spaces">
+          <label class="field-lbl">Password</label>
+          <input type="password" id="reg-pass" placeholder="at least 4 characters">
+
+          <label class="field-lbl">I am joining as…</label>
+          <div class="role-pick">
+            <button class="role-btn" id="role-rich" onclick="pickRole('rich')">
+              <span class="role-icon">💼</span>
+              <span class="role-name">I can give</span>
+              <span class="role-desc">I have skills, resources or time to offer</span>
+            </button>
+            <button class="role-btn" id="role-poor" onclick="pickRole('poor')">
+              <span class="role-icon">🙏</span>
+              <span class="role-name">I need help</span>
+              <span class="role-desc">I'm facing a difficult situation</span>
+            </button>
+          </div>
+
+          <button class="btn-submit" onclick="doRegister()">Join the movement</button>
+          <div class="err" id="reg-err"></div>
+          <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted)">Already have an account? <a href="#" onclick="switchTab('login');return false" style="color:var(--leaf);font-weight:700">Sign in →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>One People One World</strong> — A free platform connecting humanity across borders.<br>
+    No ads. No algorithms selling your data. No mockery of anyone's situation.<br>
+    Built with love for the 8 billion of us sharing this planet. 🌍
+  </footer>
 </div>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">VIDA<span>TECH</span> AI</div>
-  <div class="header-status">
-    <div class="status-dot"></div>
-    SYSTEM ONLINE · MURATI ENGINE v3.0
-  </div>
-</header>
+<!-- ══════════ APP ══════════ -->
+<div id="app">
+  <nav class="topnav">
+    <div class="topnav-brand">OPOW <span>🌍</span></div>
+    <div class="topnav-tabs">
+      <button class="tab-btn active" onclick="showPage('feed')"        id="nav-feed">Feed</button>
+      <button class="tab-btn"        onclick="showPage('communities')" id="nav-communities">Communities</button>
+      <button class="tab-btn"        onclick="showPage('messages')"    id="nav-messages">Messages</button>
+      <button class="tab-btn"        onclick="showPage('profile')"     id="nav-profile">Profile</button>
+    </div>
+    <div class="user-chip">
+      <div class="av" id="nav-av"></div>
+      <span class="role-badge" id="nav-role-badge"></span>
+    </div>
+  </nav>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-title">⬡ NAVIGATION</div>
-  <button class="new-chat-btn" onclick="newChat()">+ NEW SESSION</button>
+  <div class="main-scroll">
 
-  <div class="sidebar-title">MODEL</div>
-  <select class="model-selector" id="model-select">
-    <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option>
-    <option value="claude-opus-4-5">Claude Opus 4.5</option>
-    <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5</option>
-  </select>
-
-  <div class="sidebar-section">
-    <div class="sidebar-title" style="margin-top:20px">⬡ HISTORY</div>
-    <div id="history-list"></div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<main class="main">
-  <div class="chat-container" id="chat">
-    <div class="welcome" id="welcome">
-      <div class="welcome-title">VIDATECH AI</div>
-      <div class="welcome-sub">Powered by Murati Engine · Next-gen intelligence interface</div>
-      <div class="quick-actions">
-        <div class="quick-action" onclick="quickPrompt('Explain quantum computing in simple terms')">
-          <div class="quick-action-icon">⚛️</div>
-          <div>Explain quantum computing</div>
-          <div class="quick-action-label">Science & Technology</div>
+    <!-- FEED -->
+    <div class="page active" id="page-feed">
+      <div class="compose-card">
+        <div class="compose-top">
+          <div class="av" id="compose-av"></div>
+          <span class="compose-lbl" id="compose-hint">Share your story with the world</span>
         </div>
-        <div class="quick-action" onclick="quickPrompt('Write a Python script to analyze CSV data')">
-          <div class="quick-action-icon">🐍</div>
-          <div>Code a data analyzer</div>
-          <div class="quick-action-label">Programming</div>
+        <div class="post-type-row">
+          <button class="pt-btn" id="pt-offer" onclick="selType('offer')">🤝 I'm offering help</button>
+          <button class="pt-btn" id="pt-need"  onclick="selType('need')">🙏 I need help with…</button>
         </div>
-        <div class="quick-action" onclick="quickPrompt('Help me write a professional email')">
-          <div class="quick-action-icon">✉️</div>
-          <div>Draft a pro email</div>
-          <div class="quick-action-label">Communication</div>
+        <textarea id="post-input" placeholder="Describe your situation honestly. The right person is reading this." oninput="updateCC()"></textarea>
+
+        <!-- Image upload -->
+        <div class="img-upload-row">
+          <button class="img-upload-btn" onclick="document.getElementById('img-file').click()">📷 Add a photo</button>
+          <input type="file" id="img-file" accept="image/*" style="display:none" onchange="previewImg(this)">
+          <img id="img-preview-el" class="img-preview" alt="preview"/>
+          <span id="img-name" style="font-size:12px;color:var(--muted)"></span>
         </div>
-        <div class="quick-action" onclick="quickPrompt('Create a creative story about AI and humanity')">
-          <div class="quick-action-icon">✨</div>
-          <div>Write a story</div>
-          <div class="quick-action-label">Creative Writing</div>
+
+        <div class="compose-foot">
+          <span class="cc" id="char-ct">0 / 500</span>
+          <button class="btn btn-green btn-sm" onclick="submitPost()">Share with the world</button>
+        </div>
+      </div>
+      <div id="feed-list"></div>
+    </div>
+
+    <!-- COMMUNITIES -->
+    <div class="page" id="page-communities">
+      <div class="pg-title">Communities</div>
+      <div class="pg-sub">Find people facing or solving the same challenges.</div>
+      <div class="create-box">
+        <div class="ct">Start a new community</div>
+        <input type="text" id="com-name" placeholder="e.g. Medical Help Kenya, School Fees Africa">
+        <input type="text" id="com-desc" placeholder="What is this community about?">
+        <button class="btn btn-green btn-sm" onclick="createCommunity()">Create community</button>
+        <div class="err" id="com-err"></div>
+      </div>
+      <div id="community-list"></div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="page" id="page-messages">
+      <div class="msg-wrap">
+        <div class="contacts-panel">
+          <div class="contacts-lbl">Conversations</div>
+          <div class="new-chat-row">
+            <input type="text" id="new-chat-user" placeholder="Username…">
+            <button class="btn btn-green btn-sm" onclick="startChat()">→</button>
+          </div>
+          <div id="contact-list"></div>
+        </div>
+        <div class="chat-panel">
+          <div class="chat-hdr" id="chat-with">Select a conversation to start</div>
+          <div id="chat-msgs"></div>
+          <div class="msg-input-row" id="msg-row" style="display:none">
+            <textarea id="msg-input" placeholder="Write your message…" onkeydown="msgEnter(event)"></textarea>
+            <button class="btn btn-green btn-sm" onclick="sendMsg()">Send</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- INPUT AREA -->
-  <div class="input-area">
-    <div class="input-wrapper">
-      <!-- File preview chips -->
-      <div class="file-preview-bar" id="file-preview-bar"></div>
-
-      <div class="textarea-row">
-        <button class="attach-btn" onclick="document.getElementById('file-input').click()" title="Attach file">
-          📎
-        </button>
-        <input type="file" id="file-input" multiple accept="image/*,.pdf,.txt,.csv,.doc,.docx,.md">
-        <textarea
-          id="msg-input"
-          placeholder="Message Vidatech AI... (Shift+Enter for newline)"
-          rows="1"
-          onkeydown="handleKey(event)"
-          oninput="autoResize(this)"
-        ></textarea>
-        <button class="send-btn" id="send-btn" onclick="sendMessage()" title="Send">
-          ▶
-        </button>
+    <!-- PROFILE -->
+    <div class="page" id="page-profile">
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" id="prof-av"></div>
+          <div>
+            <div class="prof-name"   id="prof-name"></div>
+            <div class="prof-handle" id="prof-handle"></div>
+            <div class="prof-stats">
+              <div><strong id="prof-posts">0</strong> posts</div>
+              <div><strong id="prof-followers">0</strong> connections</div>
+              <div><strong id="prof-following">0</strong> following</div>
+            </div>
+          </div>
+        </div>
+        <hr class="div">
+        <label class="field-lbl">Tell your story — who you are, what you need or what you offer</label>
+        <textarea id="bio-input" placeholder="Your story matters. Be honest. Be specific. The right person will find you." style="height:90px;margin-bottom:12px"></textarea>
+        <button class="btn btn-green btn-sm" onclick="saveBio()">Save</button>
+        <div id="bio-msg" style="font-size:13px;color:var(--leaf);margin-top:8px;min-height:18px"></div>
       </div>
-      <div style="text-align:center;font-size:11px;color:var(--text-secondary);margin-top:8px;opacity:0.6">
-        Vidatech AI · Murati Engine · Drag & drop files anywhere
-      </div>
+      <div class="pg-title" style="font-size:18px;margin-bottom:14px">Your posts</div>
+      <div id="prof-posts-list"></div>
     </div>
+
   </div>
-</main>
 
-<canvas id="edit-canvas"></canvas>
+  <div class="status-bar">
+    <span><span class="dot" id="api-dot" style="background:#4caf50"></span><span id="api-status">Connecting…</span></span>
+    <span id="status-user"></span>
+  </div>
+</div>
 
-<script>
-  // ============================
-  // STATE
-  // ============================
-  let messages = [];
-  let pendingFiles = [];
-  let isLoading = false;
-  let sessions = [];
-  let currentSessionId = null;
-
-  // ============================
-  // INIT
-  // ============================
-  function init() {
-    loadSessions();
-    setupDragDrop();
-    setupFileInput();
-    autoResize(document.getElementById('msg-input'));
-  }
-
-  // ============================
-  // SESSIONS / HISTORY
-  // ============================
-  function loadSessions() {
-    try {
-      sessions = JSON.parse(localStorage.getItem('vidatech_sessions') || '[]');
-    } catch { sessions = []; }
-    renderHistory();
-  }
-
-  function saveSessions() {
-    try { localStorage.setItem('vidatech_sessions', JSON.stringify(sessions)); } catch {}
-  }
-
-  function renderHistory() {
-    const list = document.getElementById('history-list');
-    list.innerHTML = '';
-    sessions.slice().reverse().forEach(s => {
-      const el = document.createElement('div');
-      el.className = 'chat-history-item' + (s.id === currentSessionId ? ' active' : '');
-      el.textContent = s.title || 'Session';
-      el.onclick = () => loadSession(s.id);
-      list.appendChild(el);
-    });
-  }
-
-  function newChat() {
-    messages = [];
-    pendingFiles = [];
-    currentSessionId = null;
-    document.getElementById('chat').innerHTML = '';
-    document.getElementById('welcome').style.display = '';
-    document.getElementById('chat').appendChild(document.getElementById('welcome'));
-    document.getElementById('welcome').style.display = 'block';
-    clearFileBar();
-    renderHistory();
-  }
-
-  function loadSession(id) {
-    const s = sessions.find(x => x.id === id);
-    if (!s) return;
-    currentSessionId = id;
-    messages = s.messages || [];
-    renderAllMessages();
-    renderHistory();
-  }
-
-  function renderAllMessages() {
-    const chat = document.getElementById('chat');
-    chat.innerHTML = '';
-    messages.forEach(m => appendBubble(m.role, m.content, m.files, false));
-  }
-
-  function saveCurrentSession(firstUserMsg) {
-    if (!currentSessionId) {
-      currentSessionId = Date.now().toString();
-      sessions.push({ id: currentSessionId, title: firstUserMsg.slice(0, 36) + '…', messages: [] });
-    }
-    const s = sessions.find(x => x.id === currentSessionId);
-    if (s) s.messages = messages;
-    saveSessions();
-    renderHistory();
-  }
-
-  // ============================
-  // DRAG & DROP
-  // ============================
-  function setupDragDrop() {
-    document.addEventListener('dragenter', e => {
-      if (e.dataTransfer.types.includes('Files')) {
-        document.getElementById('drop-zone').classList.add('active');
-      }
-    });
-    document.addEventListener('dragleave', e => {
-      if (!e.relatedTarget || e.relatedTarget === document.documentElement) {
-        document.getElementById('drop-zone').classList.remove('active');
-      }
-    });
-    document.addEventListener('dragover', e => e.preventDefault());
-    document.addEventListener('drop', e => {
-      e.preventDefault();
-      document.getElementById('drop-zone').classList.remove('active');
-      handleFiles(Array.from(e.dataTransfer.files));
-    });
-  }
-
-  function setupFileInput() {
-    document.getElementById('file-input').addEventListener('change', function() {
-      handleFiles(Array.from(this.files));
-      this.value = '';
-    });
-  }
-
-  // ============================
-  // FILE HANDLING
-  // ============================
-  function handleFiles(files) {
-    files.forEach(f => {
-      const reader = new FileReader();
-      reader.onload = ev => {
-        const fileObj = {
-          name: f.name,
-          size: f.size,
-          type: f.type,
-          dataUrl: ev.target.result
-        };
-        pendingFiles.push(fileObj);
-        renderFileBar();
-      };
-      reader.readAsDataURL(f);
-    });
-  }
-
-  function renderFileBar() {
-    const bar = document.getElementById('file-preview-bar');
-    bar.innerHTML = '';
-    pendingFiles.forEach((f, i) => {
-      const chip = document.createElement('div');
-      chip.className = 'file-chip';
-      if (f.type.startsWith('image/')) {
-        chip.innerHTML = `
-          <img class="file-chip-thumb" src="${f.dataUrl}" alt="">
-          <span class="file-chip-name">${f.name}</span>
-          <span class="file-chip-remove" onclick="removeFile(${i})">✕</span>`;
-      } else {
-        chip.innerHTML = `
-          <span style="font-size:20px">${fileIcon(f.type)}</span>
-          <span class="file-chip-name">${f.name}</span>
-          <span class="file-chip-remove" onclick="removeFile(${i})">✕</span>`;
-      }
-      bar.appendChild(chip);
-    });
-    bar.className = 'file-preview-bar' + (pendingFiles.length ? ' has-files' : '');
-  }
-
-  function removeFile(i) {
-    pendingFiles.splice(i, 1);
-    renderFileBar();
-  }
-
-  function clearFileBar() {
-    pendingFiles = [];
-    renderFileBar();
-  }
-
-  function fileIcon(type) {
-    if (type.includes('pdf')) return '📄';
-    if (type.includes('word') || type.includes('doc')) return '📝';
-    if (type.includes('csv') || type.includes('excel')) return '📊';
-    if (type.includes('text')) return '📃';
-    return '📎';
-  }
-
-  function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/1048576).toFixed(1) + ' MB';
-  }
-
-  // ============================
-  // SEND MESSAGE
-  // ============================
-  async function sendMessage() {
-    const input = document.getElementById('msg-input');
-    const text = input.value.trim();
-    if ((!text && !pendingFiles.length) || isLoading) return;
-
-    const welcome = document.getElementById('welcome');
-    if (welcome) welcome.style.display = 'none';
-
-    isLoading = true;
-    document.getElementById('send-btn').disabled = true;
-    input.value = '';
-    autoResize(input);
-
-    const filesSnapshot = [...pendingFiles];
-    clearFileBar();
-
-    // Add user message
-    const userMsg = { role: 'user', content: text, files: filesSnapshot };
-    messages.push(userMsg);
-    appendBubble('user', text, filesSnapshot, true);
-
-    if (messages.filter(m => m.role === 'user').length === 1) {
-      saveCurrentSession(text || filesSnapshot[0]?.name || 'File upload');
-    }
-
-    // Build typing indicator
-    const typingRow = document.createElement('div');
-    typingRow.className = 'message';
-    typingRow.innerHTML = `
-      <div class="avatar ai">⬡</div>
-      <div class="typing"><span></span><span></span><span></span></div>`;
-    document.getElementById('chat').appendChild(typingRow);
-    scrollToBottom();
-
-    try {
-      const apiMessages = buildApiMessages();
-      const model = document.getElementById('model-select').value;
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model,
-          max_tokens: 1000,
-          system: "You are Vidatech AI, a powerful, precise and helpful AI assistant built by the Murati Engine. Respond clearly and helpfully. When the user shares images, analyze them. When the user shares documents, summarize or answer questions about them.",
-          messages: apiMessages
-        })
-      });
-
-      typingRow.remove();
-
-      if (!response.ok) {
-        const err = await response.json();
-        appendBubble('ai', `⚠️ API Error: ${err.error?.message || response.statusText}`, [], true);
-      } else {
-        const data = await response.json();
-        const aiText = data.content.map(b => b.text || '').join('');
-        messages.push({ role: 'assistant', content: aiText });
-        appendBubble('ai', aiText, [], true);
-        saveCurrentSession('');
-      }
-    } catch (err) {
-      typingRow.remove();
-      appendBubble('ai', `⚠️ Connection error: ${err.message}`, [], true);
-    }
-
-    isLoading = false;
-    document.getElementById('send-btn').disabled = false;
-  }
-
-  // Build API message array (with vision support)
-  function buildApiMessages() {
-    return messages.map(m => {
-      if (m.role === 'user') {
-        const content = [];
-        // Add images for vision
-        if (m.files) {
-          m.files.forEach(f => {
-            if (f.type.startsWith('image/')) {
-              const base64 = f.dataUrl.split(',')[1];
-              const mediaType = f.type;
-              content.push({ type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } });
-            } else {
-              // For non-image files, add as text context
-              content.push({ type: 'text', text: `[Attached file: ${f.name} (${f.type})]` });
-            }
-          });
-        }
-        if (m.content) content.push({ type: 'text', text: m.content });
-        return { role: 'user', content: content.length ? content : [{ type: 'text', text: '' }] };
-      } else {
-        return { role: 'assistant', content: m.content };
-      }
-    });
-  }
-
-  // ============================
-  // RENDER BUBBLE
-  // ============================
-  function appendBubble(role, text, files, animate) {
-    const chat = document.getElementById('chat');
-    const row = document.createElement('div');
-    row.className = 'message' + (role === 'user' ? ' user' : '');
-    if (!animate) row.style.animation = 'none';
-
-    const avatar = document.createElement('div');
-    avatar.className = 'avatar ' + (role === 'user' ? 'user-av' : 'ai');
-    avatar.textContent = role === 'user' ? '👤' : '⬡';
-
-    const bubble = document.createElement('div');
-    bubble.className = 'bubble ' + (role === 'user' ? 'user' : 'ai');
-
-    // Files
-    if (files && files.length) {
-      files.forEach((f, fi) => {
-        if (f.type.startsWith('image/')) {
-          // Image preview + edit toolbar
-          const imgWrap = document.createElement('div');
-
-          const img = document.createElement('img');
-          img.className = 'bubble-image';
-          img.src = f.dataUrl;
-          img.dataset.original = f.dataUrl;
-          img.dataset.brightness = '1';
-          img.dataset.grayscale = '0';
-          img.dataset.blur = '0';
-          img.dataset.rotate = '0';
-          img.dataset.flipH = '0';
-          img.dataset.flipV = '0';
-          imgWrap.appendChild(img);
-
-          // Toggle toolbar button
-          const toggleBtn = document.createElement('button');
-          toggleBtn.className = 'edit-btn';
-          toggleBtn.style.marginTop = '6px';
-          toggleBtn.textContent = '✏️ Edit Image';
-          imgWrap.appendChild(toggleBtn);
-
-          // Toolbar
-          const toolbar = document.createElement('div');
-          toolbar.className = 'image-edit-toolbar';
-          toolbar.innerHTML = `
-            <button class="edit-btn" data-action="grayscale">⬜ Grayscale</button>
-            <button class="edit-btn" data-action="blur">🌫️ Blur</button>
-            <button class="edit-btn" data-action="rotateL">↺ Rotate L</button>
-            <button class="edit-btn" data-action="rotateR">↻ Rotate R</button>
-            <button class="edit-btn" data-action="flipH">↔ Flip H</button>
-            <button class="edit-btn" data-action="flipV">↕ Flip V</button>
-            <button class="edit-btn" data-action="reset">↺ Reset</button>
-            <span class="brightness-label">☀️</span>
-            <input class="brightness-slider" type="range" min="0.2" max="2" step="0.05" value="1" data-action="brightness">
-            <button class="edit-btn" data-action="download">⬇ Save</button>
-          `;
-          imgWrap.appendChild(toolbar);
-
-          toggleBtn.onclick = () => toolbar.classList.toggle('visible');
-
-          toolbar.querySelectorAll('[data-action]').forEach(btn => {
-            btn.addEventListener('click', () => applyEdit(btn.dataset.action, img));
-            btn.addEventListener('input', () => {
-              if (btn.dataset.action === 'brightness') {
-                img.dataset.brightness = btn.value;
-                applyFilters(img);
-              }
-            });
-          });
-
-          bubble.appendChild(imgWrap);
-        } else {
-          // Document / file preview
-          const fileDiv = document.createElement('div');
-          fileDiv.className = 'bubble-file-preview';
-          fileDiv.innerHTML = `
-            <span class="bubble-file-icon">${fileIcon(f.type)}</span>
-            <div class="bubble-file-info">
-              <div class="bubble-file-name">${f.name}</div>
-              <div class="bubble-file-size">${formatSize(f.size)}</div>
-            </div>`;
-          bubble.appendChild(fileDiv);
-
-          // If text-based, show reader
-          if (f.type.startsWith('text/') || f.name.endsWith('.txt') || f.name.endsWith('.md') || f.name.endsWith('.csv')) {
-            const reader = document.createElement('div');
-            reader.className = 'doc-reader';
-            reader.textContent = 'Loading…';
-            bubble.appendChild(reader);
-            // Decode base64 text content
-            try {
-              const txt = atob(f.dataUrl.split(',')[1]);
-              reader.textContent = txt.slice(0, 4000) + (txt.length > 4000 ? '\n…[truncated]' : '');
-            } catch { reader.textContent = '[Could not display file content]'; }
-          }
-
-          // Download button for the file
-          const dlBtn = document.createElement('a');
-          dlBtn.className = 'download-btn';
-          dlBtn.href = f.dataUrl;
-          dlBtn.download = f.name;
-          dlBtn.innerHTML = '⬇ Download ' + f.name;
-          bubble.appendChild(dlBtn);
-        }
-      });
-    }
-
-    // Text content (with basic markdown-like formatting)
-    if (text) {
-      const textDiv = document.createElement('div');
-      textDiv.innerHTML = formatText(text);
-      bubble.appendChild(textDiv);
-    }
-
-    // If AI response looks like it could be a downloadable artifact
-    if (role === 'ai' && text && (text.includes('```') || text.length > 300)) {
-      const dlBtn = document.createElement('button');
-      dlBtn.className = 'download-btn';
-      dlBtn.style.marginTop = '10px';
-      dlBtn.innerHTML = '⬇ Download Response';
-      dlBtn.onclick = () => {
-        const blob = new Blob([text], { type: 'text/plain' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'vidatech-response.txt';
-        a.click();
-      };
-      bubble.appendChild(dlBtn);
-    }
-
-    row.appendChild(avatar);
-    row.appendChild(bubble);
-    chat.appendChild(row);
-    scrollToBottom();
-  }
-
-  // ============================
-  // IMAGE EDITING
-  // ============================
-  function applyEdit(action, img) {
-    if (action === 'grayscale') {
-      img.dataset.grayscale = img.dataset.grayscale === '1' ? '0' : '1';
-    } else if (action === 'blur') {
-      img.dataset.blur = img.dataset.blur === '4' ? '0' : '4';
-    } else if (action === 'rotateL') {
-      img.dataset.rotate = ((parseInt(img.dataset.rotate) - 90) % 360).toString();
-    } else if (action === 'rotateR') {
-      img.dataset.rotate = ((parseInt(img.dataset.rotate) + 90) % 360).toString();
-    } else if (action === 'flipH') {
-      img.dataset.flipH = img.dataset.flipH === '1' ? '0' : '1';
-    } else if (action === 'flipV') {
-      img.dataset.flipV = img.dataset.flipV === '1' ? '0' : '1';
-    } else if (action === 'reset') {
-      img.dataset.grayscale = '0';
-      img.dataset.blur = '0';
-      img.dataset.rotate = '0';
-      img.dataset.flipH = '0';
-      img.dataset.flipV = '0';
-      img.dataset.brightness = '1';
-      // Reset slider
-      const slider = img.closest('.message').querySelector('[data-action="brightness"]');
-      if (slider) slider.value = '1';
-    } else if (action === 'download') {
-      downloadEditedImage(img);
-      return;
-    }
-    applyFilters(img);
-  }
-
-  function applyFilters(img) {
-    const grayscale = img.dataset.grayscale === '1' ? 'grayscale(100%)' : '';
-    const blur = img.dataset.blur !== '0' ? `blur(${img.dataset.blur}px)` : '';
-    const brightness = `brightness(${img.dataset.brightness})`;
-    img.style.filter = [grayscale, blur, brightness].filter(Boolean).join(' ');
-
-    const rot = parseInt(img.dataset.rotate) || 0;
-    const fH = img.dataset.flipH === '1' ? -1 : 1;
-    const fV = img.dataset.flipV === '1' ? -1 : 1;
-    img.style.transform = `rotate(${rot}deg) scale(${fH}, ${fV})`;
-  }
-
-  function downloadEditedImage(img) {
-    const canvas = document.getElementById('edit-canvas');
-    const ctx = canvas.getContext('2d');
-    const tempImg = new Image();
-    tempImg.onload = () => {
-      canvas.width = tempImg.width;
-      canvas.height = tempImg.height;
-
-      ctx.filter = img.style.filter || 'none';
-      const rot = parseInt(img.dataset.rotate) || 0;
-      const fH = img.dataset.flipH === '1' ? -1 : 1;
-      const fV = img.dataset.flipV === '1' ? -1 : 1;
-
-      ctx.save();
-      ctx.translate(canvas.width/2, canvas.height/2);
-      ctx.rotate(rot * Math.PI / 180);
-      ctx.scale(fH, fV);
-      ctx.drawImage(tempImg, -tempImg.width/2, -tempImg.height/2);
-      ctx.restore();
-
-      const a = document.createElement('a');
-      a.download = 'vidatech-edited.png';
-      a.href = canvas.toDataURL('image/png');
-      a.click();
-    };
-    tempImg.src = img.dataset.original;
-  }
-
-  // ============================
-  // TEXT FORMATTING
-  // ============================
-  function formatText(text) {
-    return text
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-      .replace(/`([^`]+)`/g, '<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px">$1</code>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/\n/g, '<br>');
-  }
-
-  // ============================
-  // UTILITIES
-  // ============================
-  function quickPrompt(text) {
-    document.getElementById('msg-input').value = text;
-    sendMessage();
-  }
-
-  function handleKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  }
-
-  function autoResize(el) {
-    el.style.height = 'auto';
-    el.style.height = Math.min(el.scrollHeight, 160) + 'px';
-  }
-
-  function scrollToBottom() {
-    const chat = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  init();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
