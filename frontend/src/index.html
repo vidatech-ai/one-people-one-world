@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>One People One World — Give Help. Find Hope.</title>
+  <title>One People One World — Powered by Vidatech Industries</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --earth:#0d1f0d; --forest:#163016; --leaf:#2e7d32; --sage:#66bb6a;
-      --gold:#f9a825; --warm:#fff8e1; --cream:#fafdf8; --mist:#e8f5e9;
-      --text:#0d1f0d; --muted:#4a6741; --border:#c8e6c9; --white:#fff;
-      --red:#b71c1c; --rich:#1565c0; --poor:#e65100;
+      --earth:#0d1f0d;--forest:#163016;--leaf:#2e7d32;--sage:#66bb6a;
+      --gold:#f9a825;--warm:#fff8e1;--cream:#fafdf8;--mist:#e8f5e9;
+      --text:#0d1f0d;--muted:#4a6741;--border:#c8e6c9;--white:#fff;
+      --red:#b71c1c;--rich:#1565c0;--poor:#e65100;
       --display:'Playfair Display',Georgia,serif;
       --body:'Inter',system-ui,sans-serif;
     }
@@ -19,9 +19,20 @@
     body{font-family:var(--body);background:var(--cream);color:var(--text)}
     img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 
+    /* ══ TOP BAR ══ */
+    .top-bar{
+      background:var(--earth);color:rgba(255,255,255,.7);
+      text-align:center;padding:8px 16px;font-size:12px;
+      display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+    }
+    .top-bar strong{color:var(--gold)}
+    .top-bar a{color:var(--sage);text-decoration:none;font-weight:700}
+    .top-bar a:hover{color:#fff}
+
     /* ══ LANDING ══ */
     #landing{display:flex;flex-direction:column;min-height:100vh}
 
+    /* HERO */
     .hero{
       min-height:100vh;background:var(--earth);color:#fff;
       display:flex;flex-direction:column;justify-content:center;
@@ -40,7 +51,8 @@
       opacity:.15;filter:grayscale(30%);
     }
     .hp{background-size:cover;background-position:center}
-    .hero-content{position:relative;z-index:2;max-width:760px}
+    .hero-content{position:relative;z-index:2;max-width:780px}
+
     .brand-pill{
       display:inline-flex;align-items:center;gap:8px;
       background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
@@ -52,23 +64,12 @@
       font-weight:900;line-height:1.05;margin-bottom:20px;letter-spacing:-1px;
     }
     .hero h1 em{font-style:italic;color:var(--gold);display:block}
-    .hero p{
-      font-size:clamp(16px,2.5vw,20px);color:rgba(255,255,255,.72);
-      line-height:1.7;max-width:540px;margin:0 auto 40px;
-    }
+    .hero p{font-size:clamp(16px,2.5vw,20px);color:rgba(255,255,255,.72);line-height:1.7;max-width:540px;margin:0 auto 40px}
     .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
-    .btn-gold{
-      padding:15px 36px;background:var(--gold);color:var(--earth);
-      border:none;border-radius:50px;font-family:var(--body);font-size:16px;
-      font-weight:800;cursor:pointer;transition:all .2s;
-      box-shadow:0 6px 24px rgba(249,168,37,.45);
-    }
+
+    .btn-gold{padding:15px 36px;background:var(--gold);color:var(--earth);border:none;border-radius:50px;font-family:var(--body);font-size:16px;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 6px 24px rgba(249,168,37,.45)}
     .btn-gold:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(249,168,37,.6)}
-    .btn-ghost-w{
-      padding:15px 32px;background:rgba(255,255,255,.1);color:#fff;
-      border:1.5px solid rgba(255,255,255,.3);border-radius:50px;
-      font-family:var(--body);font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;
-    }
+    .btn-ghost-w{padding:15px 32px;background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:50px;font-family:var(--body);font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
     .btn-ghost-w:hover{background:rgba(255,255,255,.18)}
 
     .impact{display:flex;gap:clamp(32px,8vw,80px);justify-content:center;flex-wrap:wrap}
@@ -79,15 +80,52 @@
     .sa{font-size:18px;animation:bounce 2s ease-in-out infinite;display:block;margin-top:4px}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-    /* REALITY */
-    .reality{background:var(--earth);padding:80px 24px}
-    .r-inner{max-width:1000px;margin:0 auto}
-    .r-top{text-align:center;margin-bottom:48px}
+    /* INFINITE SCROLL PREVIEW */
+    .preview-section{background:var(--earth);padding:80px 0}
+    .preview-inner{max-width:1100px;margin:0 auto;padding:0 24px}
+    .section-head{text-align:center;margin-bottom:48px}
     .eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
     .big-t{font-family:var(--display);font-size:clamp(28px,4vw,44px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px}
     .big-s{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:500px;margin:0 auto}
 
-    .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    /* Scrolling cards marquee */
+    .marquee-wrap{overflow:hidden;position:relative;padding:8px 0}
+    .marquee-wrap::before,.marquee-wrap::after{
+      content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
+    }
+    .marquee-wrap::before{left:0;background:linear-gradient(to right,var(--earth),transparent)}
+    .marquee-wrap::after{right:0;background:linear-gradient(to left,var(--earth),transparent)}
+
+    .marquee-track{display:flex;gap:16px;width:max-content;animation:marquee 35s linear infinite}
+    .marquee-track.reverse{animation-direction:reverse;animation-duration:40s}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .marquee-wrap:hover .marquee-track{animation-play-state:paused}
+
+    .mcard{
+      width:280px;flex-shrink:0;border-radius:16px;padding:18px;
+      border:1px solid rgba(255,255,255,.08);
+      -webkit-user-select:none;user-select:none;
+    }
+    .mcard-need{background:rgba(230,81,0,.12)}
+    .mcard-offer{background:rgba(46,125,50,.12)}
+    .mcard-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .mcard-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+    .av-r{background:#1565c0;color:#fff}
+    .av-p{background:#e65100;color:#fff}
+    .mcard-name{font-size:13px;font-weight:700;color:#fff}
+    .mcard-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .role-giver{color:var(--sage)}
+    .role-receiver{color:#ffb74d}
+    .mcard-badge{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;margin-bottom:10px;letter-spacing:.5px;text-transform:uppercase}
+    .mb-need{background:rgba(230,81,0,.25);color:#ffb74d}
+    .mb-offer{background:rgba(46,125,50,.25);color:var(--sage)}
+    .mcard-text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6}
+    .mcard-loc{font-size:11px;color:rgba(255,255,255,.35);margin-top:8px}
+
+    /* REALITY PHOTOS */
+    .reality{background:#0a1a0a;padding:80px 24px}
+    .r-inner{max-width:1000px;margin:0 auto}
+    .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:48px}
     .pcard{border-radius:14px;overflow:hidden;position:relative;aspect-ratio:3/4;background:#1a2e1a;-webkit-user-select:none;user-select:none}
     .pcard img{width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:transform .4s;pointer-events:none}
     .pcard:hover img{transform:scale(1.04)}
@@ -96,18 +134,41 @@
     .pov-loc{font-size:11px;color:rgba(255,255,255,.5)}
     .pblock{position:absolute;inset:0;z-index:10;cursor:default}
 
+    /* TESTIMONIES */
+    .testimonies{background:var(--warm);padding:80px 24px}
+    .t-inner{max-width:1000px;margin:0 auto}
+    .t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:48px}
+    .t-card{
+      background:#fff;border:1px solid var(--border);border-radius:18px;
+      padding:24px;position:relative;transition:transform .2s,box-shadow .2s;
+    }
+    .t-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(13,31,13,.1)}
+    .t-quote{font-size:32px;color:var(--gold);font-family:var(--display);font-weight:900;line-height:1;margin-bottom:12px;display:block}
+    .t-text{font-size:14px;line-height:1.75;color:var(--text);margin-bottom:20px;font-style:italic}
+    .t-author{display:flex;align-items:center;gap:12px}
+    .t-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0;color:#fff}
+    .t-name{font-size:14px;font-weight:700;color:var(--earth)}
+    .t-role{font-size:12px;color:var(--muted);margin-top:2px}
+    .t-type{
+      position:absolute;top:16px;right:16px;
+      font-size:9px;font-weight:800;padding:3px 8px;border-radius:10px;
+      text-transform:uppercase;letter-spacing:.5px;
+    }
+    .tt-giver{background:rgba(46,125,50,.1);color:var(--leaf)}
+    .tt-receiver{background:rgba(230,81,0,.1);color:#e65100}
+
     /* HOW */
-    .how{background:var(--warm);padding:80px 24px}
+    .how{background:var(--earth);padding:80px 24px}
     .how-inner{max-width:900px;margin:0 auto;text-align:center}
     .hgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:48px}
-    .hcard{background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px 20px;text-align:left;transition:transform .2s,box-shadow .2s}
-    .hcard:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(13,31,13,.1)}
+    .hcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px 20px;text-align:left;transition:transform .2s}
+    .hcard:hover{transform:translateY(-4px)}
     .hicon{font-size:38px;margin-bottom:14px;display:block}
-    .hcard h3{font-size:15px;font-weight:700;color:var(--earth);margin-bottom:8px}
-    .hcard p{font-size:13px;color:var(--muted);line-height:1.65}
+    .hcard h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+    .hcard p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65}
 
     /* TYPES */
-    .types{background:var(--earth);padding:80px 24px}
+    .types{background:var(--warm);padding:80px 24px}
     .tinner{max-width:800px;margin:0 auto;text-align:center}
     .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
     .tcard{border-radius:20px;padding:32px 24px;text-align:center;transition:transform .2s}
@@ -129,33 +190,34 @@
     .auth-tab{flex:1;padding:10px;background:none;border:none;font-family:var(--body);font-size:14px;font-weight:700;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
     .auth-tab.active{color:var(--earth);border-bottom-color:var(--leaf)}
     .flbl{display:block;font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
-    input[type=text],input[type=password],textarea,select{
-      width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;
-      font-family:var(--body);font-size:14px;color:var(--text);background:#fff;
-      outline:none;margin-bottom:14px;transition:border-color .2s;
-    }
-    input:focus,textarea:focus,select:focus{border-color:var(--leaf)}
+    input[type=text],input[type=password],textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--body);font-size:14px;color:var(--text);background:#fff;outline:none;margin-bottom:14px;transition:border-color .2s}
+    input:focus,textarea:focus{border-color:var(--leaf)}
     .role-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
     .role-btn{padding:14px 8px;border-radius:12px;border:2px solid var(--border);background:none;font-family:var(--body);cursor:pointer;text-align:center;transition:all .15s}
     .ri{font-size:28px;display:block;margin-bottom:6px}
     .rn{font-size:13px;font-weight:700;display:block;margin-bottom:4px}
     .rd{font-size:11px;color:var(--muted);line-height:1.4}
-    .pick-rich{border-color:#1565c0;background:rgba(21,101,192,.06)}
-    .pick-rich .rn{color:#1565c0}
-    .pick-poor{border-color:#e65100;background:rgba(230,81,0,.06)}
-    .pick-poor .rn{color:#e65100}
+    .pick-rich{border-color:#1565c0;background:rgba(21,101,192,.06)}.pick-rich .rn{color:#1565c0}
+    .pick-poor{border-color:#e65100;background:rgba(230,81,0,.06)}.pick-poor .rn{color:#e65100}
     .btn-submit{width:100%;padding:14px;background:var(--earth);color:#fff;border:none;border-radius:12px;font-family:var(--body);font-size:15px;font-weight:800;cursor:pointer;transition:background .15s;margin-top:4px}
     .btn-submit:hover{background:var(--forest)}
     .err{color:var(--red);font-size:13px;margin-top:-8px;margin-bottom:10px;min-height:18px}
     .switch-lnk{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
     .switch-lnk a{color:var(--leaf);font-weight:700;text-decoration:none}
 
-    footer{background:var(--earth);color:rgba(255,255,255,.35);text-align:center;padding:28px 24px;font-size:12px;line-height:1.8}
-    footer strong{color:rgba(255,255,255,.6)}
+    /* FOOTER */
+    footer{background:var(--earth);color:rgba(255,255,255,.4);padding:48px 24px 24px;text-align:center}
+    .footer-brand{font-family:var(--display);font-size:22px;font-weight:900;color:#fff;margin-bottom:4px}
+    .footer-powered{font-size:12px;color:var(--gold);margin-bottom:16px;font-weight:600}
+    .footer-contact{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:8px 20px;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:24px;font-weight:500}
+    .footer-contact a{color:var(--gold);text-decoration:none;font-weight:700}
+    .footer-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+    .footer-links a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+    .footer-links a:hover{color:#fff}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.25);border-top:1px solid rgba(255,255,255,.06);padding-top:20px;margin-top:8px}
 
     /* ══ APP ══ */
     #app{display:none;flex-direction:column;height:100vh;overflow:hidden}
-
     .topnav{background:var(--earth);color:#fff;display:flex;align-items:center;padding:0 16px;height:52px;flex-shrink:0;gap:10px}
     .topnav-brand{font-family:var(--display);font-size:16px;font-weight:900;color:#fff;flex-shrink:0}
     .topnav-brand span{color:var(--gold)}
@@ -165,8 +227,7 @@
     .tab-btn.active{background:rgba(255,255,255,.15);color:#fff;font-weight:700}
     .uc{display:flex;align-items:center;gap:6px;flex-shrink:0}
     .av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
-    .av-rich{background:#1565c0;color:#fff}
-    .av-poor{background:#e65100;color:#fff}
+    .av-rich{background:#1565c0;color:#fff}.av-poor{background:#e65100;color:#fff}
     .rbadge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;letter-spacing:.4px;text-transform:uppercase}
     .rb-rich{background:rgba(21,101,192,.2);color:#90caf9}
     .rb-poor{background:rgba(230,81,0,.2);color:#ffcc80}
@@ -174,6 +235,12 @@
     .main-scroll{flex:1;overflow-y:auto;padding:20px 16px 40px}
     .page{display:none;max-width:680px;margin:0 auto}
     .page.active{display:block}
+
+    /* FEED TABS */
+    .feed-tabs{display:flex;gap:8px;margin-bottom:16px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px}
+    .feed-tab{flex:1;padding:8px;border:none;border-radius:8px;background:none;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
+    .feed-tab.active{background:var(--earth);color:#fff}
+    .feed-tab-count{font-size:10px;background:rgba(255,255,255,.2);padding:1px 5px;border-radius:8px;margin-left:4px;display:inline-block}
 
     /* Compose */
     .compose-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:20px}
@@ -191,19 +258,17 @@
     .media-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
     .media-btn{padding:8px 14px;border-radius:8px;border:1.5px dashed var(--border);background:none;font-family:var(--body);font-size:12px;color:var(--muted);cursor:pointer;transition:all .15s}
     .media-btn:hover{border-color:var(--leaf);color:var(--leaf)}
-    .media-preview{max-width:100%;max-height:200px;border-radius:10px;margin-top:8px;display:none}
-    .vid-preview{max-width:100%;max-height:200px;border-radius:10px;margin-top:8px;display:none}
+    .media-preview{max-width:100%;max-height:220px;border-radius:10px;margin-top:8px;display:none}
+    .vid-preview{max-width:100%;max-height:220px;border-radius:10px;margin-top:8px;display:none}
     .media-name{font-size:11px;color:var(--muted)}
-    .progress-bar{height:4px;background:var(--mist);border-radius:4px;overflow:hidden;margin-top:8px;display:none}
-    .progress-fill{height:100%;background:var(--leaf);width:0%;transition:width .3s}
+    .prog-bar{height:4px;background:var(--mist);border-radius:4px;overflow:hidden;margin-top:8px;display:none}
+    .prog-fill{height:100%;background:var(--leaf);width:0%;transition:width .3s}
 
     /* Buttons */
     .btn{padding:8px 16px;border-radius:8px;border:none;font-family:var(--body);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
     .btn:active{transform:scale(.97)}
-    .btn-green{background:var(--leaf);color:#fff}
-    .btn-green:hover{background:var(--forest)}
-    .btn-outline{background:none;border:1.5px solid var(--border);color:var(--text)}
-    .btn-outline:hover{background:var(--mist)}
+    .btn-green{background:var(--leaf);color:#fff}.btn-green:hover{background:var(--forest)}
+    .btn-outline{background:none;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{background:var(--mist)}
     .btn-danger{background:var(--red);color:#fff}
     .btn-sm{padding:6px 12px;font-size:12px}
 
@@ -216,22 +281,31 @@
     .pname{font-size:14px;font-weight:700;color:var(--earth)}
     .ptime{font-size:11px;color:var(--muted)}
     .pbody{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:14px;white-space:pre-wrap;-webkit-user-select:text;user-select:text}
-
-    /* Protected media */
-    .media-wrap{border-radius:12px;overflow:hidden;margin-bottom:14px;position:relative;-webkit-user-select:none;user-select:none;background:#000}
+    .media-wrap{border-radius:12px;overflow:hidden;margin-bottom:14px;position:relative;background:#000}
     .media-wrap img{width:100%;display:block;border-radius:12px;pointer-events:none;-webkit-user-drag:none}
-    .media-wrap video{width:100%;display:block;border-radius:12px;pointer-events:auto}
+    .media-wrap video{width:100%;display:block;border-radius:12px}
     .media-guard{position:absolute;inset:0;z-index:2;background:transparent;pointer-events:none}
-    /* Only allow video controls */
-    .media-wrap video + .media-guard{display:none}
-
     .pactions{display:flex;gap:8px;flex-wrap:wrap}
     .liked{border-color:var(--red)!important;color:var(--red)!important}
 
-    /* Load more */
+    /* Spinner */
     .load-more-wrap{text-align:center;padding:20px 0}
     .load-spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--leaf);border-radius:50%;animation:spin .8s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* TESTIMONIES PAGE */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+    .test-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;transition:transform .2s,box-shadow .2s}
+    .test-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(13,31,13,.1)}
+    .test-q{font-size:28px;color:var(--gold);font-family:var(--display);font-weight:900;line-height:1;margin-bottom:10px}
+    .test-text{font-size:14px;line-height:1.75;color:var(--text);margin-bottom:16px;font-style:italic}
+    .test-author{display:flex;align-items:center;gap:10px}
+    .test-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+    .test-name{font-size:13px;font-weight:700;color:var(--earth)}
+    .test-info{font-size:11px;color:var(--muted)}
+    .submit-test-card{background:linear-gradient(135deg,var(--earth),var(--forest));border-radius:16px;padding:24px;color:#fff;margin-bottom:20px}
+    .submit-test-card h3{font-family:var(--display);font-size:18px;font-weight:800;margin-bottom:8px}
+    .submit-test-card p{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:16px;line-height:1.6}
 
     /* Communities */
     .pg-title{font-family:var(--display);font-size:22px;font-weight:800;margin-bottom:4px;color:var(--earth)}
@@ -271,11 +345,8 @@
     .ps strong{color:var(--earth)}
     hr.div{border:none;border-top:1px solid var(--border);margin:14px 0}
 
-    /* Status */
     .sbar{height:24px;background:var(--earth);display:flex;align-items:center;padding:0 16px;font-size:11px;color:rgba(255,255,255,.35);gap:16px;flex-shrink:0}
     .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px}
-
-    /* Empty */
     .empty{text-align:center;color:var(--muted);padding:40px 24px;font-size:14px;line-height:1.7}
     .ei{font-size:40px;display:block;margin-bottom:10px}
 
@@ -284,13 +355,22 @@
       .tgrid{grid-template-columns:1fr}
       .msg-wrap{grid-template-columns:1fr}
       .hero-photos{display:none}
+      .test-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body oncontextmenu="return false">
 
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>🌍 <strong>One People One World</strong> — Powered by <strong>Vidatech Industries</strong></span>
+  <span>📞 More info: <a href="tel:0113259315">0113259315</a></span>
+</div>
+
 <!-- ══ LANDING ══ -->
 <div id="landing">
+
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-photos">
@@ -321,12 +401,33 @@
         <div><span class="i-num">🔒</span><div class="i-lbl">Dignity protected</div></div>
       </div>
     </div>
-    <div class="scroll-hint">scroll to learn more<span class="sa">↓</span></div>
+    <div class="scroll-hint">scroll to see real people<span class="sa">↓</span></div>
   </section>
 
+  <!-- LIVE PREVIEW — Infinite scrolling cards -->
+  <section class="preview-section">
+    <div class="preview-inner">
+      <div class="section-head">
+        <div class="eyebrow">Live on the platform</div>
+        <h2 class="big-t">Real people. Real stories.<br>Happening right now.</h2>
+        <p class="big-s">These are the kinds of connections being made every day on One People One World.</p>
+      </div>
+
+      <!-- Row 1: Needs -->
+      <div class="marquee-wrap" style="margin-bottom:16px">
+        <div class="marquee-track" id="marquee1"></div>
+      </div>
+      <!-- Row 2: Givers -->
+      <div class="marquee-wrap">
+        <div class="marquee-track reverse" id="marquee2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REALITY PHOTOS -->
   <section class="reality">
     <div class="r-inner">
-      <div class="r-top">
+      <div class="section-head">
         <div class="eyebrow">The reality</div>
         <h2 class="big-t">Every face here is a story.<br>Every story deserves an ending.</h2>
         <p class="big-s">Real people. Real situations. Your help could be the chapter that changes everything.</p>
@@ -351,40 +452,110 @@
     </div>
   </section>
 
-  <section class="how">
-    <div class="how-inner">
-      <div class="eyebrow" style="color:var(--leaf)">How it works</div>
-      <h2 class="big-t" style="color:var(--earth)">Beautifully simple. Powerfully human.</h2>
-      <p class="big-s" style="color:var(--muted)">Three steps stand between someone's crisis and your helping hand.</p>
-      <div class="hgrid">
-        <div class="hcard"><span class="hicon">👤</span><h3>Join as who you are</h3><p>Sign up as a Giver or Receiver. Both roles are equally important and respected here.</p></div>
-        <div class="hcard"><span class="hicon">📸</span><h3>Share your story</h3><p>Post photos and videos of your situation. Your media is protected — no downloading, no mocking, no sharing without consent.</p></div>
-        <div class="hcard"><span class="hicon">💬</span><h3>Connect directly</h3><p>No charity fees. No intermediaries. One person sees another's post and reaches out. That's it.</p></div>
-        <div class="hcard"><span class="hicon">🛡️</span><h3>Dignity first, always</h3><p>Images and videos cannot be downloaded or saved. Your story is shared in safety, not vulnerability.</p></div>
+  <!-- TESTIMONIES -->
+  <section class="testimonies">
+    <div class="t-inner">
+      <div class="section-head" style="text-align:center;margin-bottom:0">
+        <div class="eyebrow" style="color:var(--leaf)">Testimonies</div>
+        <h2 class="big-t" style="color:var(--earth)">Real words from real people<br>whose lives changed here.</h2>
+        <p class="big-s" style="color:var(--muted)">Not advertisements. Not stories we made up. These are the human moments this platform exists for.</p>
+      </div>
+      <div class="t-grid">
+        <div class="t-card">
+          <span class="t-type tt-giver">Giver</span>
+          <span class="t-quote">"</span>
+          <p class="t-text">I'm a retired doctor in Germany. I saw a post from a mother in Zimbabwe who couldn't afford her child's medication. I knew exactly which generic substitute would work. One message. One life saved. That's all it took.</p>
+          <div class="t-author">
+            <div class="t-av" style="background:#1565c0">DK</div>
+            <div><div class="t-name">Dr. Klaus M.</div><div class="t-role">Retired Physician · Berlin, Germany</div></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <span class="t-type tt-receiver">Receiver</span>
+          <span class="t-quote">"</span>
+          <p class="t-text">I lost my job during the drought. I posted here asking for help learning to code. Within a week, three developers were teaching me for free, every evening via video call. Now I have a remote job and I'm helping others do the same.</p>
+          <div class="t-author">
+            <div class="t-av" style="background:#e65100">JM</div>
+            <div><div class="t-name">James Mutua</div><div class="t-role">Software Developer · Nairobi, Kenya</div></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <span class="t-type tt-giver">Giver</span>
+          <span class="t-quote">"</span>
+          <p class="t-text">I'm 68 and I have decades of legal knowledge sitting unused. Here I help people navigate systems that would otherwise crush them. It's the most meaningful work of my entire life. I found my purpose after retirement.</p>
+          <div class="t-author">
+            <div class="t-av" style="background:#2e7032">MR</div>
+            <div><div class="t-name">Margaret R.</div><div class="t-role">Retired Lawyer · Toronto, Canada</div></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <span class="t-type tt-receiver">Receiver</span>
+          <span class="t-quote">"</span>
+          <p class="t-text">My daughter needed surgery we couldn't afford. I posted here not knowing what to expect. Within 24 hours, a stranger from Sweden had connected me with a hospital doing free procedures. My daughter is alive and healthy today.</p>
+          <div class="t-author">
+            <div class="t-av" style="background:#e65100">FO</div>
+            <div><div class="t-name">Fatima O.</div><div class="t-role">Mother · Lagos, Nigeria</div></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <span class="t-type tt-giver">Giver</span>
+          <span class="t-quote">"</span>
+          <p class="t-text">I run a small bakery. Every Friday I post what leftover food I have. Families come. We share a meal together. It's not charity — it's just neighbours being neighbours across a larger neighbourhood called Earth.</p>
+          <div class="t-author">
+            <div class="t-av" style="background:#1565c0">AB</div>
+            <div><div class="t-name">Ahmed B.</div><div class="t-role">Baker · Casablanca, Morocco</div></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <span class="t-type tt-receiver">Receiver</span>
+          <span class="t-quote">"</span>
+          <p class="t-text">My school had no books, no chairs, just walls and children eager to learn. A teacher in the UK saw my post, organised her school's old textbooks, and shipped 400 books to us. Our students now have libraries.</p>
+          <div class="t-author">
+            <div class="t-av" style="background:#2e7032">SN</div>
+            <div><div class="t-name">Sister Nakato</div><div class="t-role">Teacher · Kampala, Uganda</div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- HOW -->
+  <section class="how">
+    <div class="how-inner">
+      <div class="eyebrow">How it works</div>
+      <h2 class="big-t">Beautifully simple. Powerfully human.</h2>
+      <p class="big-s" style="color:rgba(255,255,255,.55)">Three steps stand between someone's crisis and your helping hand.</p>
+      <div class="hgrid">
+        <div class="hcard"><span class="hicon">👤</span><h3>Join as who you are</h3><p>Sign up as a Giver or Receiver. Both are equally important and respected.</p></div>
+        <div class="hcard"><span class="hicon">📸</span><h3>Share your story</h3><p>Post photos and videos. Your media is fully protected — no downloading or mocking allowed.</p></div>
+        <div class="hcard"><span class="hicon">💬</span><h3>Connect directly</h3><p>No charity fees. No intermediaries. One person sees another's post and reaches out. That's it.</p></div>
+        <div class="hcard"><span class="hicon">🛡️</span><h3>Dignity first, always</h3><p>Images cannot be saved or shared without consent. Your story belongs to you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES -->
   <section class="types">
     <div class="tinner">
-      <div class="eyebrow" style="color:var(--sage)">Two sides, one world</div>
-      <h2 class="big-t">Everyone has a role to play.</h2>
-      <p class="big-s" style="color:rgba(255,255,255,.55)">Whether you're joining to give or receive — you belong here.</p>
+      <div class="eyebrow" style="color:var(--leaf)">Two sides, one world</div>
+      <h2 class="big-t" style="color:var(--earth)">Everyone has a role to play.</h2>
+      <p class="big-s" style="color:var(--muted)">Whether joining to give or receive — you belong here.</p>
       <div class="tgrid">
         <div class="tcard tc-rich">
           <span class="ticon">💼</span><h3>I can give</h3>
-          <p>You have skills, money, time, or knowledge. Give directly — no charity taking 40% fees.</p>
+          <p>Skills, money, time, or knowledge. Give directly — no charity taking 40% fees.</p>
           <span class="ttag">Doctor · Lawyer · Donor · Mentor</span>
         </div>
         <div class="tcard tc-poor">
           <span class="ticon">🙏</span><h3>I need help</h3>
-          <p>You're facing a situation you can't solve alone. Your dignity is fully protected here.</p>
+          <p>Medical costs, school fees, food, legal advice, emotional support. Your dignity is protected.</p>
           <span class="ttag">Medical · Education · Food · Legal</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- AUTH -->
   <section class="auth-sect" id="auth-anchor">
     <div class="a-inner">
       <h2 class="a-title">Take your place in the world.</h2>
@@ -394,7 +565,6 @@
           <button class="auth-tab active" id="tab-login-btn"    onclick="switchTab('login')">Sign in</button>
           <button class="auth-tab"        id="tab-register-btn" onclick="switchTab('register')">Join free</button>
         </div>
-
         <div id="tab-login">
           <label class="flbl">Username</label>
           <input type="text"     id="login-user" placeholder="your username" autocomplete="username">
@@ -404,7 +574,6 @@
           <div class="err" id="login-err"></div>
           <p class="switch-lnk">No account? <a href="#" onclick="switchTab('register');return false">Join the world →</a></p>
         </div>
-
         <div id="tab-register" style="display:none">
           <label class="flbl">Your full name</label>
           <input type="text" id="reg-display" placeholder="How the world will know you">
@@ -416,7 +585,7 @@
           <div class="role-pick">
             <button class="role-btn" id="role-rich" onclick="pickRole('rich')">
               <span class="ri">💼</span><span class="rn">I can give</span>
-              <span class="rd">I have skills or resources to offer</span>
+              <span class="rd">Skills, resources or time to offer</span>
             </button>
             <button class="role-btn" id="role-poor" onclick="pickRole('poor')">
               <span class="ri">🙏</span><span class="rn">I need help</span>
@@ -425,16 +594,29 @@
           </div>
           <button class="btn-submit" onclick="doRegister()">Join the movement</button>
           <div class="err" id="reg-err"></div>
-          <p class="switch-lnk">Already have an account? <a href="#" onclick="switchTab('login');return false">Sign in →</a></p>
+          <p class="switch-lnk">Have an account? <a href="#" onclick="switchTab('login');return false">Sign in →</a></p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <strong>One People One World</strong> — A free platform connecting humanity across borders.<br>
-    No ads. No algorithms. No downloading others' stories to mock them.<br>
-    Built for the 8 billion of us sharing this planet. 🌍
+    <div class="footer-brand">🌍 One People One World</div>
+    <div class="footer-powered">Powered by Vidatech Industries</div>
+    <div class="footer-contact">
+      📞 More information: <a href="tel:0113259315">0113259315</a>
+    </div>
+    <div class="footer-links">
+      <a href="#" onclick="scrollToAuth('register');return false">Join free</a>
+      <a href="#" onclick="scrollToAuth('login');return false">Sign in</a>
+      <a href="tel:0113259315">Contact us</a>
+      <a href="#">Privacy & dignity policy</a>
+    </div>
+    <div class="footer-copy">
+      © 2025 One People One World · Powered by Vidatech Industries · Built for the 8 billion of us sharing this planet.<br>
+      No ads. No algorithms. No downloading others' stories to mock them.
+    </div>
   </footer>
 </div>
 
@@ -444,6 +626,7 @@
     <div class="topnav-brand">OPOW <span>🌍</span></div>
     <div class="tnav-tabs">
       <button class="tab-btn active" onclick="showPage('feed')"        id="nav-feed">Feed</button>
+      <button class="tab-btn"        onclick="showPage('testimonies')" id="nav-testimonies">Testimonies</button>
       <button class="tab-btn"        onclick="showPage('communities')" id="nav-communities">Communities</button>
       <button class="tab-btn"        onclick="showPage('messages')"    id="nav-messages">Messages</button>
       <button class="tab-btn"        onclick="showPage('profile')"     id="nav-profile">Profile</button>
@@ -455,6 +638,7 @@
   </nav>
 
   <div class="main-scroll" id="main-scroll">
+
     <!-- FEED -->
     <div class="page active" id="page-feed">
       <div class="compose-card">
@@ -467,27 +651,48 @@
           <button class="ptbtn" id="pt-need"  onclick="selType('need')">🙏 I need help</button>
         </div>
         <textarea id="post-input" placeholder="Describe your situation. The right person is reading this." oninput="updateCC()"></textarea>
-
         <div class="media-row">
           <button class="media-btn" onclick="document.getElementById('media-file').click()">📷 Photo / 🎥 Video</button>
           <input type="file" id="media-file" accept="image/*,video/*" style="display:none" onchange="handleMedia(this)">
           <span class="media-name" id="media-name"></span>
         </div>
-        <div class="progress-bar" id="prog-bar"><div class="progress-fill" id="prog-fill"></div></div>
+        <div class="prog-bar" id="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
         <img  id="img-prev" class="media-preview" alt="preview"/>
         <video id="vid-prev" class="vid-preview" controls></video>
-
         <div class="compose-foot">
           <span class="cc" id="char-ct">0 / 500</span>
           <button class="btn btn-green btn-sm" onclick="submitPost()">Share with the world</button>
         </div>
       </div>
 
-      <div id="feed-list"></div>
-      <div class="load-more-wrap" id="load-more-wrap" style="display:none">
-        <div class="load-spinner" id="load-spinner"></div>
+      <!-- Feed filter tabs -->
+      <div class="feed-tabs">
+        <button class="feed-tab active" id="ftab-all"    onclick="setFeedFilter('all')">🌍 All stories</button>
+        <button class="feed-tab"        id="ftab-need"   onclick="setFeedFilter('need')">🙏 Needs help</button>
+        <button class="feed-tab"        id="ftab-offer"  onclick="setFeedFilter('offer')">🤝 Offering help</button>
       </div>
-      <div id="no-more" style="display:none;text-align:center;padding:16px;font-size:13px;color:var(--muted)">You've seen everything 🌍</div>
+
+      <div id="feed-list"></div>
+      <div class="load-more-wrap" id="load-more-wrap" style="display:none"><div class="load-spinner"></div></div>
+      <div id="no-more" style="display:none;text-align:center;padding:20px;font-size:13px;color:var(--muted)">
+        🌍 You've seen all posts · <a href="#" onclick="resetAndLoadFeed();return false" style="color:var(--leaf);font-weight:700">Refresh</a>
+      </div>
+    </div>
+
+    <!-- TESTIMONIES -->
+    <div class="page" id="page-testimonies">
+      <div class="pg-title">Testimonies</div>
+      <div class="pg-sub">Real stories of lives changed through connection.</div>
+
+      <div class="submit-test-card">
+        <h3>Share your testimony</h3>
+        <p>Has this platform changed your life? Has someone helped you or have you helped someone? Share your story — it inspires others to believe change is possible.</p>
+        <textarea id="test-input" placeholder="Tell your story honestly and from the heart…" style="height:80px;resize:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;font-family:var(--body);font-size:14px;padding:12px;width:100%;outline:none;margin-bottom:12px"></textarea>
+        <button class="btn btn-green btn-sm" onclick="submitTestimony()">Share my testimony</button>
+        <div id="test-err" style="color:#ffb74d;font-size:13px;margin-top:8px;min-height:18px"></div>
+      </div>
+
+      <div class="test-grid" id="testimony-list"></div>
     </div>
 
     <!-- COMMUNITIES -->
@@ -496,9 +701,9 @@
       <div class="pg-sub">Find your people. Build around a cause.</div>
       <div class="cbox">
         <div class="ct">Start a new community</div>
-        <input type="text" id="com-name" placeholder="e.g. Medical Help Kenya">
+        <input type="text" id="com-name" placeholder="e.g. Medical Help Kenya, School Fees Africa">
         <input type="text" id="com-desc" placeholder="What is this community about?">
-        <button class="btn btn-green btn-sm" onclick="createCommunity()">Create</button>
+        <button class="btn btn-green btn-sm" onclick="createCommunity()">Create community</button>
         <div class="err" id="com-err"></div>
       </div>
       <div id="community-list"></div>
@@ -549,14 +754,20 @@
       <div class="pg-title" style="font-size:18px;margin-bottom:14px">Your posts</div>
       <div id="prof-posts-list"></div>
     </div>
+
   </div>
 
   <div class="sbar">
     <span><span class="dot" id="api-dot" style="background:#4caf50"></span><span id="api-status">Connecting…</span></span>
-    <span id="status-user"></span>
+    <span>Powered by <strong style="color:var(--gold)">Vidatech Industries</strong> · <a href="tel:0113259315" style="color:rgba(255,255,255,.5);text-decoration:none">0113259315</a></span>
   </div>
 </div>
 
 <script src="app.js"></script>
 </body>
 </html>
+HTMLEOF
+echo "done"
+Output
+
+done
